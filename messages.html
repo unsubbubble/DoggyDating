@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doggy Dates</title>
+    <link href="css/stylesheet.css" type="text/css" rel="stylesheet"/>
+    <link href="css/messages.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="navbar row">
+            <div class="tall-col col-3">
+                <a href="discover.html"><img src="images/logo.png" alt="DoggyDates Logo"/></a>
+            </div>
+            <div class="tall-col col-5"></div>
+            <div class="tall-col col-1"><a href="discover.html"><span class="fa fa-search fa-big"></span></a></div>
+            <div class="tall-col col-1"><a href="messages.html"><span class="fa fa-comment fa-big"></span></a></div>
+            <div class="tall-col col-1">
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropdown-btn">
+                        <span class="fa fa-user fa-big"></span>
+                        <span class="fa fa-caret-down fa-small"></span>
+                    </button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="profile.html">Profile</a>
+                        <a href="index.html">Logout</a>
+                    </div>
+                </div>
+                <a href="profile.html">
+
+
+                </a>
+            </div>
+        </div>
+    </nav>
+
+</header>
+
+<div class="row">
+    <div class="col col-1"></div>
+    <div class="col col-2 contacts">
+        <h3>Contacts</h3>
+        <div class="row">
+            <div class="col col-6">
+                <div class="message-profile">
+                    <img src="images/dogs/1.jpg" alt="Contact Photo">
+                </div>
+            </div>
+            <div class="col col-2"><a href="#">Charlie</a></div>
+        </div>
+        <div class="row">
+            <div class="col col-6">
+                <div class="message-profile">
+                    <img src="images/dogs/3.jpg" alt="Contact Photo">
+                </div>
+            </div>
+            <div class="col col-2"><a href="#">Coco</a></div>
+        </div>
+        <div class="row">
+            <div class="col col-6">
+                <div class="message-profile">
+                    <img src="images/dogs/4.jpg" alt="Contact Photo">
+                </div>
+            </div>
+            <div class="col col-2"><a href="#">Daisy</a></div>
+        </div>
+        <div class="row">
+            <div class="col col-6">
+                <div class="message-profile">
+                    <img src="images/dogs/5.jpg" alt="Contact Photo">
+                </div>
+            </div>
+            <div class="col col-2"><a href="#">Toby</a></div>
+        </div>
+    </div>
+    <div class="col col-6">
+        <h2>Messages</h2>
+        <div class="messages-container">
+            <br/>
+            <div id="id_messages" class="messages">
+                <br/>
+                <span class="message-r">Hi! Do you want to play?</span>
+                <br/>
+                <span class="message-s">Sure!</span>
+            </div>
+            <div class="messages-send">
+                &nbsp;&nbsp;
+                <input class="text-input" type="text" placeholder="Type a message...">
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="row">
+        <div class="col col-1"></div>
+        <div class="col col-2">Author: William Hunt</div>
+        <div class="col col-2">Student Number: 21716309</div>
+        <div class="col col-1"></div>
+        <div class="col col-3"> Last Revised: 20:00 12/04/2017</div>
+        <div class="col col-1">
+            <a href="references.html">References</a>
+        </div>
+    </div>
+</footer>
+
+<script src="js/dropdown.js"></script>
+</body>
+</html>

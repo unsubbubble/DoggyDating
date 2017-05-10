@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doggy Dates - Registration</title>
+    <link href="css/stylesheet.css" type="text/css" rel="stylesheet"/>
+    <script src="js/validation.js"></script>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="navbar row">
+            <div class="tall-col col-3">
+                <a href="index.html"><img src="images/logo.png" alt="DoggyDates Logo"/> </a>
+            </div>
+            <div class="tall-col col-8"></div>
+        </div>
+    </nav>
+</header>
+
+
+<div class="row">
+    <div class="col col-3"></div>
+    <div class="col col-6">
+        <h3>Registration</h3>
+        <form class="pull-text-left" method="post" action="registration_dog.html">
+            <div>
+                <label>
+                    Profile Picture
+                    <br/>
+                    <span id="id_profile_picture_error" class="error"></span>
+                    <br/>
+                    <input id="id_profile_picture" type="file" name="profile_picture" accept='image/*' required>
+                </label>
+                <br/>
+                <br/>
+                <span id="id_email_error" class="error"></span>
+                <input id="id_email" class="text-input" type="email" name="email" placeholder="Email" required>
+                <br/>
+                <span id="id_name_error" class="error"></span>
+                <input id="id_name" class="text-input" type="text" name="name" placeholder="Name" required>
+                <br/>
+                <span id="id_dob_error" class="error"></span>
+                <br/>
+                <input id="id_dob" type="date" name="dob" required>
+                <br/>
+                <br/>
+                <label>Gender</label>
+                <br/>
+                <span id="id_gender_error" class="error"></span>
+                <br/>
+                <label>
+                    Male
+                    <input  type="radio" name="gender" value="male" required>
+                </label>
+                <label>
+                    Female
+                    <input type="radio" name="gender" value="female" required>
+                </label>
+                <br/>
+                <br/>
+                <span id="id_address_error" class="error"></span>
+                <input id="id_address" class="text-input" type="text" name="address" placeholder="Suburb" required>
+                <br/>
+                <span id="id_pass1_error" class="error"></span>
+                <input id="id_pass1" class="text-input" type="password" name="password1" placeholder="Password" required>
+                <br/>
+                <span id="id_pass2_error" class="error"></span>
+                <input id="id_pass2" class="text-input" type="password" name="password2" placeholder="Confirm Password" required>
+            </div>
+            <br/>
+            <button class="btn btn-primary pull-right" onclick="validateForm(this.form)">Next</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <div class="row">
+        <div class="col col-1"></div>
+        <div class="col col-2">Author: William Hunt</div>
+        <div class="col col-2">Student Number: 21716309</div>
+        <div class="col col-1"></div>
+        <div class="col col-3"> Last Revised: 20:00 12/04/2017</div>
+        <div class="col col-1">
+            <a href="references.html">References</a>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doggy Dates</title>
+    <link href="css/stylesheet.css" type="text/css" rel="stylesheet"/>
+    <link href="css/discover.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="navbar row">
+            <div class="tall-col col-3">
+                <a href="discover.html"><img src="images/logo.png" alt="DoggyDates Logo"/></a>
+            </div>
+            <div class="tall-col col-5"></div>
+            <div class="tall-col col-1"><a href="discover.html"><span class="fa fa-search fa-big"></span></a></div>
+            <div class="tall-col col-1"><a href="messages.html"><span class="fa fa-comment fa-big"></span></a></div>
+            <div class="tall-col col-1">
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropdown-btn">
+                        <span class="fa fa-user fa-big"></span>
+                        <span class="fa fa-caret-down fa-small"></span>
+                    </button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="profile.html">Profile</a>
+                        <a href="index.html">Logout</a>
+                    </div>
+                </div>
+                <a href="profile.html">
+
+
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="dog-discover-profile">
+    <div class="row">
+        <div class="tall-col col-4"></div>
+        <div class="tall-col col-4">
+            <h2 class="center-text">Find playmates in your area!</h2>
+            <br/>
+            <div class="discover-container">
+                <div class="img-container">
+                    <img id="id_discover_image" src="images/dogs/1.jpg" alt="Dog Profile Picture"/>
+                </div>
+                <div class="row">
+                    <div class="tall-col col-1"></div>
+                    <div class="tall-col col-2">
+                        <a href="#" onclick="discover();"><span class="fa fa-times fa-extra-big"></span></a>
+                    </div>
+                    <div class="tall-col col-2">
+                        <a href="#" onclick="discover();"><span class="fa fa-heart fa-extra-big fa-red"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tall-col col-4"></div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="row">
+        <div class="col col-1"></div>
+        <div class="col col-2">Author: William Hunt</div>
+        <div class="col col-2">Student Number: 21716309</div>
+        <div class="col col-1"></div>
+        <div class="col col-3"> Last Revised: 20:00 12/04/2017</div>
+        <div class="col col-1">
+            <a href="references.html">References</a>
+        </div>
+    </div>
+</footer>
+
+<script src="js/dropdown.js"></script>
+<script src="js/discover.js"></script>
+</body>
+</html>

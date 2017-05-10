@@ -1,0 +1,15 @@
+.discover-container{
+    border: 10px solid #2196f3;
+    padding: 25px;
+    border-radius: 25px;
+}
+
+.img-container{
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.img-container img{
+    display: block;
+    margin: 0 auto;
+}
