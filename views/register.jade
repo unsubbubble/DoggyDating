@@ -1,4 +1,4 @@
-extends layout.jade
+extends unauth_base.jade
 
 block nav			
 	h1
@@ -6,12 +6,10 @@ block nav
 	div.row
 		div.col.col-3
 		div.col.col-6
-			h3
-				Registration
+			h3 Registration
 			form.pull-text-left(method="post", action="registration_dog.html")
 				div
-					label
-						Profile Picture
+					label Profile Picture
 						br
 						span.error(id="id_profile_picture_error")
 						br
@@ -29,16 +27,13 @@ block nav
 					input(id="id_dob", type="date", name="dob", required)
 					br
 					br
-					label
-						Gender
+					label Gender
 					br
 					span.error(id="id_gender_error")
 					br
-					label
-						Male
+					label Male
 						input(type="radio", name="gender", value="male", required)
-					label
-						Female
+					label Female
 						input(type="radio", name="gender", value="female", required)
 					br
 					br
@@ -51,6 +46,5 @@ block nav
 					span.error(id="id_pass2_error")
 					input.text-input(id="id_pass2", type="password", name="password2", placeholder="Confirm Password", required)
 				br
-				button.btn.btn-primary.pull-right(onclick="validateForm(this.form)")
-					Next
+				button.btn.btn-primary.pull-right(onclick="validateForm(this.form)") Next
 					
