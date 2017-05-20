@@ -4,15 +4,30 @@ block content
 	div.row
 		div.col.col-1
 		div.col.col-2.contacts
+			h3 Contacts
+			div.row
+				div.col.col-6
+					div.message-profile
+						img(src="images/dogs/1.jpg", alt="Contact Photo")
+				div.col.col-2
+					a(href="#") Charlie
+			div.row
+				div.col.col-6
+					div.message-profile
+						img(src="images/dogs/3.jpg", alt="Contact Photo")
+				div.col.col-2
+					a(href="#") Coco
+			div.row
+				div.col.col-6
+					div.message-profile
+						img(src="images/dogs/4.jpg", alt="Contact Photo")
+				div.col.col-2
+					a(href="#") Daisy
+			div.row
+				div.col.col-6
+					div.message-profile
+						img(src="images/dogs/5.jpg", alt="Contact Photo")
+				div.col.col-2
+					a(href="#") Toby
 		div.col.col-6
-			h2 Messages
-			div.messages-container
-				br
-				div.messages(id="id_messages")
-					br
-					span.message-r Hi! Do you want to play?
-					br
-					span.message-s Sure!
-				div.messages-send
-					input.text-input(type="text", placeholder="Type a message...")
 					
