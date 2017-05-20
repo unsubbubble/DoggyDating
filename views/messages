@@ -1,8 +1,3 @@
 extends auth_base.jade
-
 block content
-	div.row
-		div.col.col-1
-		div.col.col-2.contacts
-			h3 Contacts
 					
