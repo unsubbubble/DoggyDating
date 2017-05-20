@@ -1,0 +1,48 @@
+extends auth_base.jade
+block content
+br
+br
+form(action="#", method="post")
+	div.row
+		div.col.col-1
+		div.col.col-3
+			img(src="images/dogs/2.jpg", alt="Dog Profile Picture")
+		div.col.col-6
+			h2 Dog's Profile
+			table.table-striped
+				tr
+					th Name
+					td
+						input.text-input(type="text", name="dog_name", value="Puppy", placeholder="Name", required)
+				tr
+					th Age
+					td
+						input.text-input(type="number", name="dog_age", value="4", placeholder="Age", required)
+				tr
+					th Picture
+					td
+						input.text-input(type="file", name="dog_picture", accept="image/*")
+			br
+			br
+			h2 Owner Profile
+			table.table-striped
+				tr
+					th Name
+					td
+						input.text-input(type="text", name="name", value="John Smith", placeholder="Name", required)
+				tr
+					th Date of Birth
+					td
+						input.input(type="date", name="date", value="2000-01-01", required)
+				tr
+					th Email
+					td
+						input.text-input(type="email", name="email", value="puppylover@gmail.com", placeholder="Email", required)
+				tr
+					th Suburb
+					td
+						input.text-input(type="text", name="address", value="Perth", placeholder="Address", required)
+	div.row
+		div.col.col-9
+		div.col.col-2
+			button.btn.btn-primary(type="submit", onclick="validateForm(this.form)") Update Profile
