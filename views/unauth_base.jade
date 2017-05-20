@@ -1,5 +1,7 @@
 extends layout.jade
 
+block head
+
 block nav
 	header
 		nav
@@ -9,3 +11,18 @@ block nav
 						img(src="images/logo.png", alt="DoggyDates Logo")
 		
 	block content
+
+	
+block footer
+	footer
+		div.row
+			div.col.col-1
+			div.col.col-2
+				Author: William Hunt
+			div.col.col-1
+			div.col.col-3
+				Last Revised:
+			div.col.col-1
+				a(href="reference.html")
+					References
+	

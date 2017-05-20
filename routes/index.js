@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
 /* GET registration page. */
 router.get('/register', function(req, res, next) {
-  res.render('register', { title: 'DoggyDates' });
+  res.render('register', { title: 'DoggyDates - Registration' });
 });
 
 module.exports = router;
