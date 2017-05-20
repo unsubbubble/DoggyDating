@@ -38,6 +38,6 @@ block content
 					span.message-r Hi! Do you want to play?
 					br
 					span.message-s Sure!
-				div.messages-send &nbsp;&nbsp;
+				div.messages-send
 					input.text-input(type="text", placeholder="Type a message...")
 					
