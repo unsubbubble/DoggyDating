@@ -11,4 +11,9 @@ router.get('/register', function(req, res, next) {
   res.render('register', { title: 'DoggyDates - Registration' });
 });
 
+/* GET dog registration page. */
+router.get('/register/dog', function(req, res, next) {
+  res.render('register_dog', { title: 'DoggyDates - Dog Registration' });
+});
+
 module.exports = router;

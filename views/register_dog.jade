@@ -1,0 +1,41 @@
+extends unauth_base.jade
+
+block content			
+	div.row
+		div.col.col-3
+		div.col.col-6
+			h3 Registration
+			br
+			a.pull-left(href="registration.html")
+				span.fa.fa-chevron-left
+			br
+			br
+			form.pull-text-left(method="post", action="discover.html")
+				label Dog's Profile Picture
+					br
+					span.error(id="id_profile_picture_error")
+					br
+					input(id="id_profile_picture", type="file", name="profile_picture", accept="image/*", required)
+				br
+				br
+				span.error(id="id_name_error")
+				input.text-input(id="id_name", type="text", name="name", placeholder="Name", required)
+				br
+				span.error(id="id_age_error")
+				input.text-input(id="id_age", type="number", name="age", placeholder="Age", required)
+				br
+				label Gender
+				br
+				span.error(id="id_gender_error")
+				br
+				label Male
+					input(type="radio", name="gender", value="male", required)
+				label Female
+					input(type="radio", name="gender", value="female", required)
+				br
+				br
+				span.error(id="id_breed_error")
+				input.text-input(id="id_breed", type="text", name="breed", placeholer="Breed", required)
+				br
+				button.btn.btn-primary.pull-right(type="submit", onclick="validateForm(this.form);") Complete Profile
+				
