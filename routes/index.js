@@ -21,4 +21,9 @@ router.get('/discover', function(req, res, next) {
   res.render('discover', { title: 'Discover' });
 });
 
+/* GET messages page */
+router.get('/messages', function(req, res, next) {
+  res.render('messages', { title: 'Messages' });
+});
+
 module.exports = router;
