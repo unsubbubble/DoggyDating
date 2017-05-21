@@ -22,4 +22,4 @@ var gracefulShutdown = function(msg, callback){
 				});
 };
 
-var userModels = require('userModels');
+var userModels = require('./userModels');
