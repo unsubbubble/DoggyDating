@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Dog = mongoose.model('Dog');
 
 /* Get UnAuth Pages */
 
@@ -74,7 +75,7 @@ module.exports.registerPost = function(req, res, next){
 			}
 			else{
 				console.log(data, ' saved');
-				res.render('register_dog', { title: 'DoggyDates - Dog Registration' });
+				res.render('register_dog', { title: 'DoggyDates - Dog Registration', user: newUser});
 			};
 		
 		});
@@ -87,5 +88,75 @@ module.exports.registerPost = function(req, res, next){
 /* Registration Dog */
 module.exports.registerDog =  function(req, res, next) {
 	res.render('register_dog', { title: 'DoggyDates - Dog Registration' });
+};
+
+function validateRegistrationDog(req){
+	var valid = true;
+	if(!req.body.profile_picture){
+		valid = false;
+	}
+	
+	if(!req.body.name){
+		valid = false;
+	}
+	
+	if(!req.body.age){
+		valid = false;
+	}
+	
+	if(!req.body.gender){
+		valid = false;
+	}
+	
+	if(!req.body.breed){
+		valid = false;
+	}
+
+	if(!req.body.user){
+		valid = false;
+	}
+	
+	return valid;
+}
+
+module.exports.registerDogPost = function(req, res, next){
+	console.log(req.body);
+	if(!validateRegistrationDog(req)){
+		res.status(500);
+		res.render('error', {
+			message:"Error: Parameters missing",
+			error:{}
+		});
+	}
+	else{
+		var newDog = new Dog({
+			name: req.body.name,
+			age: new Number(req.body.age),
+			gender: req.body.gender,
+			picture: req.body.profile_picture,
+			breed: req.body.breed,
+			owner: User(req.body.user),
+			
+			dateCreated: Date.now()
+		});
+		
+		console.log(newDog);
+		newDog.save(function(err, data){
+			if(err){
+				console.log(err);
+				res.status(500);
+				res.render('error', {
+					message:err.message,
+					error:err
+				});
+			}
+			else{
+				console.log(data, ' saved');
+				res.render('discover', { title: 'DoggyDates'});
+			};
+		
+		});
+		
+	}
 };
 
