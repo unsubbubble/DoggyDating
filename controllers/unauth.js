@@ -1,5 +1,5 @@
 var express = require('express');
-var db = require('../models/UserModels');
+var db = require('../models/userModels');
 
 /* Get UnAuth Pages */
 
