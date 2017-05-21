@@ -1,36 +1,26 @@
 var express = require('express');
 var router = express.Router();
 
+var ctrlUnAuth = require('../controllers/unauth');
+var ctrlAuth = require('../controllers/auth');
+
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'DoggyDates' });
-});
+router.get('/', ctrlUnAuth.home);
 
 /* GET registration page. */
-router.get('/register', function(req, res, next) {
-  res.render('register', { title: 'DoggyDates - Registration' });
-});
+router.get('/register', ctrlUnAuth.register);
 
 /* GET dog registration page. */
-router.get('/register-dog', function(req, res, next) {
-  res.render('register_dog', { title: 'DoggyDates - Dog Registration' });
-});
+router.get('/register-dog', ctrlUnAuth.registerDog);
 
 /* GET discover page */
-router.get('/discover', function(req, res, next) {
-  res.render('discover', { title: 'Discover' });
-});
+router.get('/discover', ctrlAuth.discover);
 
 /* GET messages page */
-router.get('/messages', function(req, res, next) {
-  res.render('messages', { title: 'Messages' });
-});
-
+router.get('/messages', ctrlAuth.messages);
 
 /* GET profile page */
-router.get('/profile', function(req, res, next) {
-  res.render('profile', { title: 'Profile' });
-});
-
+router.get('/profile', ctrlAuth.profile);
 
 module.exports = router;
