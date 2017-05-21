@@ -9,6 +9,7 @@ router.get('/', ctrlUnAuth.home);
 
 /* GET registration page. */
 router.get('/register', ctrlUnAuth.register);
+router.post('/register', ctrlUnAuth.registerPost);
 
 /* GET dog registration page. */
 router.get('/register-dog', ctrlUnAuth.registerDog);

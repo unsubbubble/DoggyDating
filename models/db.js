@@ -19,7 +19,7 @@ var gracefulShutdown = function(msg, callback){
 	mongoose.connection.close(function(){
 		console.log('Mongoose disconnected through ' + msg);
 			callback();
-				});
+	});
 };
 
 var userModels = require('./userModels');
