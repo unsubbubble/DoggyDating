@@ -40,7 +40,7 @@ function validateRegistration(req){
 	return valid;
 }
 
-module.exports.register = function(req, res, next){
+module.exports.registerPost = function(req, res, next){
 	console.log(req.body);
 	if(!validateRegistration(req)){
 		res.status(500);
