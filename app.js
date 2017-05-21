@@ -17,6 +17,7 @@ MongoClient.connect('mongodb://21716309:cits3403@ds147821.mlab.com:47821/doggyda
 	db = databse
 	app.listen(3000, () => {
 		console.log('listening on 3000')
+		console.log(db)
 	})
 })
 
