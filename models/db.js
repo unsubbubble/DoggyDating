@@ -43,16 +43,18 @@ var userSchema = new mongoose.Schema({
 	profilePicture:{type:String, required:true},
 	phoneNumber:{type:String, required:true},
 	suburb:{type:String, required:true},
-	
+	/*
 	dog:{type:[dogSchema], required:true},
 	
 	dateCreated:{type:Date, required:true},
 	dateLastEdited:{type:Date, required:true. default:Date.now},
 	isDeleted:{type:Boolean, required:true, default:false}
+	*/
 });
 	
 mongoose.model('User', userSchema);
 
+/*
 var matchSchema = new mongoose.Schema({
 	response:{type:String, required:true},
 	user:{type:[userSchema], required:true},
@@ -77,3 +79,4 @@ var notificationSchema = new mongoose.Schema({
 });
 
 mongoose.model('Notifications', notificationSchema);
+*/
