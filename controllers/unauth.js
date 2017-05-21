@@ -129,7 +129,7 @@ module.exports.registerDogPost = function(req, res, next){
 		});
 	}
 	else{
-		User.findOne(({_id:req.body.user}, function(err, user){ 
+		User.findOne({_id:req.body.user}, function(err, user){ 
 			if(err){
 				console.log(err);
 				res.status(500);
