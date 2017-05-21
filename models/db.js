@@ -44,27 +44,27 @@ var userSchema = new mongoose.Schema({
 	phoneNumber:{type:String, required:true},
 	suburb:{type:String, required:true},
 	
-	//dog:{type:[dogSchema], required:true},
+	dog:{type:[dogSchema], required:true},
 	
 	dateCreated:{type:Date, required:true},
 	dateLastEdited:{type:Date, required:true. default:Date.now},
-	isDeleted:{type:Boolean, required:true, default:False}
+	isDeleted:{type:Boolean, required:true, default:false}
 });
 	
 mongoose.model('User', userSchema);
 
 var matchSchema = new mongoose.Schema({
 	response:{type:String, required:true},
-	//user:{type:[userSchema], required:true},
-	//targetUser:{type:[userSchema], required:true},
+	user:{type:[userSchema], required:true},
+	targetUser:{type:[userSchema], required:true},
 });
 
 mongoose.model('Matches', matchSchema);
 
 var messageSchema = new mongoose.Schema({
 	message:{type:String, required:true},
-	//userFrom:{type:[userSchema], required:true},
-	//userTo:{type:[userSchema], required:true},
+	userFrom:{type:[userSchema], required:true},
+	userTo:{type:[userSchema], required:true},
 	read:{type:Boolean, required:true, default:false},
 });
 
@@ -72,7 +72,7 @@ mongoose.model('Messages', messageSchema);
 
 var notificationSchema = new mongoose.Schema({
 	target:{type:String, required:true},
-	//userTarget:{type:[userSchema], required:true},
+	userTarget:{type:[userSchema], required:true},
 	read:{type:Boolean, required:true; default;false},
 });
 
