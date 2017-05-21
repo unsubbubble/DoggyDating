@@ -1,5 +1,5 @@
-var express = require('express');
-var db = require('../models/userModels');
+var db = require('mongoose');
+var User = mongoose.model('User');
 
 /* Get UnAuth Pages */
 
@@ -52,6 +52,7 @@ module.exports.registerPost = function(req, res, next){
 		});
 	}
 	else{
+		console.log(User);
 		var newUser = new User({
 			email: req.body.email,
 			name: req.body.name,
