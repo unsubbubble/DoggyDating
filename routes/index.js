@@ -4,7 +4,6 @@ var router = express.Router();
 var ctrlUnAuth = require('../controllers/unauth');
 var ctrlAuth = require('../controllers/auth');
 
-
 /* GET home page. */
 router.get('/', ctrlUnAuth.home);
 
@@ -16,6 +15,7 @@ router.get('/register-dog', ctrlUnAuth.registerDog);
 
 /* GET discover page */
 router.get('/discover', ctrlAuth.discover);
+router.post('/discover', ctrlAuth.discoverPost);
 
 /* GET messages page */
 router.get('/messages', ctrlAuth.messages);

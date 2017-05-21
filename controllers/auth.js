@@ -5,6 +5,10 @@ module.exports.discover = function(req, res, next) {
   res.render('discover', { title: 'Discover' });
 };
 
+module.exports.discoverPost = function(req, res, next) {
+  res.render('discover', { title: 'Discover' });
+};
+
 /* Messages */
 module.exports.messages = function(req, res, next) {
   res.render('messages', { title: 'Messages' });
