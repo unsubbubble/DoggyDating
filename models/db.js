@@ -54,7 +54,7 @@ var userSchema = new mongoose.Schema({
 	
 mongoose.model('User', userSchema);
 
-/*
+
 var matchSchema = new mongoose.Schema({
 	response:{type:String, required:true},
 	user:{type:[userSchema], required:true},
@@ -75,8 +75,7 @@ mongoose.model('Messages', messageSchema);
 var notificationSchema = new mongoose.Schema({
 	target:{type:String, required:true},
 	userTarget:{type:[userSchema], required:true},
-	read:{type:Boolean, required:true; default;false},
+	read:{type:Boolean, required:true, default:false},
 });
 
 mongoose.model('Notifications', notificationSchema);
-*/
