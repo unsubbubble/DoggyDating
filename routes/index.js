@@ -34,6 +34,6 @@ router.get('/profile', function(req, res, next) {
 
 
 router.post('/discover', function(req, res, next){
-	console.log(db);
+	
 }
 module.exports = router;
