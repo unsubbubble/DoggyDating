@@ -1,4 +1,4 @@
-var db = require('mongoose');
+var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
 /* Get UnAuth Pages */
