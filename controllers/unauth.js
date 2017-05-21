@@ -52,11 +52,10 @@ module.exports.registerPost = function(req, res, next){
 		});
 	}
 	else{
-		console.log(User);
 		var newUser = new User({
 			email: req.body.email,
 			name: req.body.name,
-			dateOfBirth: req.body.dob,
+			dateOfBirth: new Date(req.body.dob),
 			gender: req.body.gender,
 			profilePicture: req.body.profile_picture,
 			suburb: req.body.address,
