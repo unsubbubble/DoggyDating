@@ -75,7 +75,7 @@ module.exports.registerPost = function(req, res, next){
 			}
 			else{
 				console.log(data, ' saved');
-				res.render('register_dog', { title: 'DoggyDates - Dog Registration', user: newUser});
+				res.render('register_dog', { title: 'DoggyDates - Dog Registration', user: newUser._id});
 			};
 		
 		});
@@ -129,19 +129,7 @@ module.exports.registerDogPost = function(req, res, next){
 		});
 	}
 	else{
-		var newDog = new Dog({
-			name: req.body.name,
-			age: new Number(req.body.age),
-			gender: req.body.gender,
-			picture: req.body.profile_picture,
-			breed: req.body.breed,
-			owner: User(req.body.user),
-			
-			dateCreated: Date.now()
-		});
-		
-		console.log(newDog);
-		newDog.save(function(err, data){
+		User.findOne(({_id:req.body.user}, function(err, user){ 
 			if(err){
 				console.log(err);
 				res.status(500);
@@ -151,12 +139,35 @@ module.exports.registerDogPost = function(req, res, next){
 				});
 			}
 			else{
-				console.log(data, ' saved');
-				res.render('discover', { title: 'DoggyDates'});
-			};
-		
+				var newDog = new Dog({
+					name: req.body.name,
+					age: new Number(req.body.age),
+					gender: req.body.gender,
+					picture: req.body.profile_picture,
+					breed: req.body.breed,
+					owner: user,
+					
+					dateCreated: Date.now()
+				});
+				
+				console.log(newDog);
+				newDog.save(function(err, data){
+					if(err){
+						console.log(err);
+						res.status(500);
+						res.render('error', {
+							message:err.message,
+							error:err
+						});
+					}
+					else{
+						console.log(data, ' saved');
+						res.render('discover', { title: 'DoggyDates'});
+					};
+				
+				});
+			}
 		});
-		
 	}
 };
 
