@@ -59,7 +59,7 @@ module.exports.registerPost = function(req, res, next){
 			gender: req.body.gender,
 			profilePicture: req.body.profile_picture,
 			suburb: req.body.address,
-			dateCreated: Date.now
+			dateCreated: Date.now()
 		});
 		
 		console.log(newUser);
