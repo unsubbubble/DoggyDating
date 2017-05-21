@@ -8,18 +8,9 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
-var app = express();
+var db = require('./models/db');
 
-const MongoClient = require('mongodb').MongoClient
-var db
-MongoClient.connect('mongodb://21716309:cits3403@ds147821.mlab.com:47821/doggydating', (err, databse) => {
-	if(err) return console.log(err)
-	db = databse
-	app.listen(3000, () => {
-		console.log('listening on 3000')
-		console.log(db)
-	})
-})
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
