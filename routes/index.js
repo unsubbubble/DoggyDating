@@ -13,6 +13,7 @@ router.post('/register', ctrlUnAuth.registerPost);
 
 /* GET dog registration page. */
 router.get('/register-dog', ctrlUnAuth.registerDog);
+router.post('/register-dog', ctrlUnAuth.registerDogPost);
 
 /* GET discover page */
 router.get('/discover', ctrlAuth.discover);
