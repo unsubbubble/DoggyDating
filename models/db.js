@@ -21,5 +21,3 @@ var gracefulShutdown = function(msg, callback){
 			callback();
 				});
 };
-
-var userModels = require('userModels')
