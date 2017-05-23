@@ -80,7 +80,7 @@ module.exports.registerPost = function(req, res, next){
 				});
 			}
 			else{
-				passport.authenicate('local')(req, res, function(){
+				passport.authenticate('local')(req, res, function(){
 				res.render('register_dog', { title: 'DoggyDates - Dog Registration', user: newUser._id});
 				});
 			};
