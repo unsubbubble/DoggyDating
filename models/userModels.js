@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
+var passportLocalMongoose = require('passport-local-mongoose');
 
 var userSchema = new mongoose.Schema({
 	email:{type:String, required:true},
+	password:{type:String, required:true},
 	name:{type:String, required:true},
 	dateOfBirth:{type:String, required:true},
 	gender:{type:String, required:true},
@@ -15,6 +17,7 @@ var userSchema = new mongoose.Schema({
 	
 });
 	
+User.plugin(passportLocalMongoose);
 var User = mongoose.model('User', userSchema);
 
 var dogSchema = new mongoose.Schema({
