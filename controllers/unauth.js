@@ -11,7 +11,7 @@ module.exports.home = function(req, res, next){
 };
 
 module.exports.login  = function(req, res, next){
-	res.render('discover', { title: 'DoggyDates' });
+	res.redirect('/discover');
 };
 
 /* Registration */

@@ -2,7 +2,7 @@
 
 /* Discover */
 module.exports.discover = function(req, res, next) {
-  res.render('discover', { title: 'Discover' });
+  res.render('discover', { title: 'Discover', user: req.user });
 };
 
 module.exports.discoverPost = function(req, res, next) {
