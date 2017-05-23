@@ -60,6 +60,7 @@ module.exports.registerPost = function(req, res, next){
 	else{
 		var newUser = new User({
 			email: req.body.email,
+			username: req.body.email,
 			name: req.body.name,
 			dateOfBirth: new Date(req.body.dob),
 			gender: req.body.gender,
