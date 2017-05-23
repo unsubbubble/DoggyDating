@@ -2,7 +2,7 @@ extends auth_base.jade
 
 block content
 	if(user)
-		h1 user
+		h1 You are currently logged in as #{user.username}
 	div.dog-discover-profile
 		div.row
 			div.tall-col.col-4
