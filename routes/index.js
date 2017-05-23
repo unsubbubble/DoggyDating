@@ -6,6 +6,7 @@ var ctrlAuth = require('../controllers/auth');
 
 /* GET home page. */
 router.get('/', ctrlUnAuth.home);
+router.post('/login', passport.authenticate('local'), ctrlUnAuth.login);
 
 /* GET registration page. */
 router.get('/register', ctrlUnAuth.register);

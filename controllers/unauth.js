@@ -10,6 +10,10 @@ module.exports.home = function(req, res, next){
 	res.render('index', { title: 'DoggyDates' });
 };
 
+module.exports.login  = function(req, res, next){
+	res.render('discover', { title: 'DoggyDates' });
+};
+
 /* Registration */
 module.exports.register = function(req, res, next){
 	res.render('register', { title: 'DoggyDates - Registration' });
@@ -80,9 +84,7 @@ module.exports.registerPost = function(req, res, next){
 				});
 			}
 			else{
-				passport.authenticate('local')(req, res, function(){
 				res.render('register_dog', { title: 'DoggyDates - Dog Registration', user: newUser._id});
-				});
 			};
 		
 		});
