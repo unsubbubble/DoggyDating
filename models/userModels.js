@@ -17,7 +17,7 @@ var userSchema = new mongoose.Schema({
 	
 });
 	
-User.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 var User = mongoose.model('User', userSchema);
 
 var dogSchema = new mongoose.Schema({
