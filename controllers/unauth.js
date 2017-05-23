@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var passport = require('passport');
 var User = mongoose.model('User');
 var Dog = mongoose.model('Dog');
 
@@ -40,6 +41,10 @@ function validateRegistration(req){
 		valid = false;
 	}
 	
+	if(!req.body.password1 || !req.body.password2 || req.body.password1 != req.body.password2){
+		valid = false;
+	}
+	
 	return valid;
 }
 
@@ -64,7 +69,7 @@ module.exports.registerPost = function(req, res, next){
 		});
 		
 		console.log(newUser);
-		newUser.save(function(err, data){
+		User.register(newUser, req.body.password1, function(err, data){
 			if(err){
 				console.log(err);
 				res.status(500);
@@ -74,8 +79,9 @@ module.exports.registerPost = function(req, res, next){
 				});
 			}
 			else{
-				console.log(data, ' saved');
+				passport.authenicate('local')(req, res, function(){
 				res.render('register_dog', { title: 'DoggyDates - Dog Registration', user: newUser._id});
+				});
 			};
 		
 		});
