@@ -49,6 +49,10 @@ function validateRegistration(req){
 		valid = false;
 	}
 	
+	if(!req.body.dog){
+		valid = false;
+	}
+	
 	return valid;
 }
 
@@ -136,10 +140,6 @@ function validateRegistrationDog(req){
 	if(!req.body.breed){
 		valid = false;
 	}
-
-	if(!req.body.user){
-		valid = false;
-	}
 	
 	return valid;
 }
@@ -178,7 +178,7 @@ module.exports.registerDogPost = function(req, res, next){
 			else{
 				
 				console.log(data, ' saved');
-				res.redirect('register', {dog: newDog._id});
+				res.redirect('/register', {dog: newDog._id});
 				
 			}
 		});
