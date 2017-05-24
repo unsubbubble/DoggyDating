@@ -40,16 +40,11 @@ function sortDiscover(req, callback){
   Matches.find({'user': req.user._id}, 'targetUser', function(err, ids){
     var invalidIds = [];
     invalidIds.push(req.user._id);
-    console.log(ids);
-    for(var pastMatch in ids){
-      console.log(pastMatch);
-      console.log(ids[pastMatch].targetUser);
-      console.log(ids[pastMatch]['targetUser']);
 
+    for(var pastMatch in ids){
       invalidIds.push(ids[pastMatch].targetUser);
     }
 
-    console.log("InvalidIds: " + invalidIds);
     User.find({'_id': {$nin: invalidIds}}, function (err, matches) {
         if (err) return handleError(err);
 
@@ -142,7 +137,7 @@ module.exports.discoverPost = function(req, res, next) {
                       });
                   }
                   else{
-                      res.redirect("/");
+                      res.redirect("/discover");
 
                   }
               });
@@ -159,4 +154,11 @@ module.exports.messages = function(req, res, next) {
 /* Profile */
 module.exports.profile = function(req, res, next) {
   res.render('profile', { title: 'Profile' });
+};
+
+
+/* Logout */
+module.exports.logout = function(req, res, next){
+    req.logout();
+    res.redirect('/');
 };

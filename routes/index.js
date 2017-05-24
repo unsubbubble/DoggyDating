@@ -9,6 +9,9 @@ var ctrlAuth = require('../controllers/auth');
 router.get('/', ctrlUnAuth.home);
 router.post('/login', passport.authenticate('local'), ctrlUnAuth.login);
 
+/* GET logout */
+router.get('/logout', ctrlAuth.logout);
+
 /* GET registration page. */
 router.get('/register', ctrlUnAuth.register);
 router.post('/register', ctrlUnAuth.registerPost);
