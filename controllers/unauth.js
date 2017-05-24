@@ -84,7 +84,10 @@ module.exports.registerPost = function(req, res, next){
 				});
 			}
 			else{
-				passport.authenticate('local')(req, res, function () {
+				passport.authenticate(new LocalStrategy({
+					usernameField: req.body.email,
+					passwordField: req.body.password1,
+				},)(req, res, function () {
 				  res.redirect('/register_dog');
 				});
 			};
