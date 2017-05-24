@@ -13,13 +13,16 @@ block content
 					div.img-container
 						img(id="id_discover_image", src="images/dogs/1.jpg", alt="Dog Profile Picture")
 					div.row
-						div.tall-col.col-1
-						div.tall-col.col-2
-							a(href="#", onclick="discover();")
-								span.fa.fa-times.fa-extra-big
-						div.tall-col.col-2
-							a(href="#", onclick="discover();")
-								span.fa.fa-heart.fa-extra-big.fa-red
+						form(method="post", action="/discover")
+							div.tall-col.col-1
+								input(type="hidden", id="id_response", name="response")
+								input(type="hidden", name="targetUser", value=targetUser)
+							div.tall-col.col-2
+								a(href="#", onclick="discover('reject');")
+									span.fa.fa-times.fa-extra-big
+							div.tall-col.col-2
+								a(href="#", onclick="discover('accept');")
+									span.fa.fa-heart.fa-extra-big.fa-red
 			div.tall-col.col-4
 			
 	script(src="js/discover.js")

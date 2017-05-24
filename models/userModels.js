@@ -30,7 +30,7 @@ var userSchema = new mongoose.Schema({
 	
 	dateCreated:{type:Date, required:true},
 	dateLastEdited:{type:Date, required:true, default:Date.now},
-	isDeleted:{type:Boolean, required:true, default:false},
+	isDeleted:{type:Boolean, required:true, default:false}
 	
 });
 	
@@ -42,6 +42,7 @@ var matchSchema = new mongoose.Schema({
 	response:{type:String, required:true},
 	user:{type:[userSchema], required:true},
 	targetUser:{type:[userSchema], required:true},
+    dateCreated:{type:Date, required:true}
 });
 
 var Matches = mongoose.model('Matches', matchSchema);
@@ -51,6 +52,7 @@ var messageSchema = new mongoose.Schema({
 	userFrom:{type:[userSchema], required:true},
 	userTo:{type:[userSchema], required:true},
 	read:{type:Boolean, required:true, default:false},
+    dateCreated:{type:Date, required:true}
 });
 
 var Messages = mongoose.model('Messages', messageSchema);
@@ -59,6 +61,7 @@ var notificationSchema = new mongoose.Schema({
 	target:{type:String, required:true},
 	userTarget:{type:[userSchema], required:true},
 	read:{type:Boolean, required:true, default:false},
+    dateCreated:{type:Date, required:true}
 });
 
 var Notifications = mongoose.model('Notifications', notificationSchema);
