@@ -103,7 +103,7 @@ module.exports.registerPost = function(req, res, next){
 					else{
 						
 						console.log(data, ' saved');
-						res.redirect('/', {});
+						res.redirect('/');
 						
 					}
 				});
