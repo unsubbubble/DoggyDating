@@ -36,7 +36,7 @@ function rateMatch(user, match){
   return score;
 }
 
-function sortDiscover(req){
+function sortDiscover(req, callback){
     User.find({'_id': {$ne: req.user._id}}, function (err, matches) {
         if (err) return handleError(err);
 
@@ -58,14 +58,17 @@ function sortDiscover(req){
         console.log(bestMatch);
         console.log(bestMatch._id);
 
-        return bestMatch;
+        callback(bestMatch);
     });
 }
 
 /* Discover */
 module.exports.discover = function(req, res, next) {
   if(loggedIn(req)){
-      res.render('discover', { title: 'Discover', user: req.user, targetUser: sortDiscover(req)._id});
+      sortDiscover(req, function(targetUser){
+        console.log(targetUser);
+          res.render('discover', { title: 'Discover', user: req.user, targetUser: targetUser})
+      });
   }
   else{
     res.redirect("/");
