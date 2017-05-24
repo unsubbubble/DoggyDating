@@ -43,7 +43,7 @@ function sortDiscover(req, callback){
     console.log(ids);
     for(var pastMatch in ids){
       console.log(pastMatch);
-      console.log(ids[pastMatch].targetUser);
+      console.log(ids[pastMatch].targetUser._id);
       console.log(ids[pastMatch]['targetUser']);
 
       invalidIds.push(ids[pastMatch].targetUser._id);
