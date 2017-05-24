@@ -16,7 +16,7 @@ module.exports.login  = function(req, res, next){
 
 /* Registration */
 module.exports.register = function(req, res, next){
-	res.render('register', { title: 'DoggyDates - Registration' });
+	res.render('register_dog', { title: 'DoggyDates - Registration' });
 };
 
 function validateRegistration(req){
@@ -177,7 +177,7 @@ module.exports.registerDogPost = function(req, res, next){
 			else{
 				
 				console.log(data, ' saved');
-				res.redirect('/register', {dog: newDog._id});
+				res.render('register', {dog: newDog._id});
 				
 			}
 		});
