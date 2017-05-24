@@ -61,8 +61,9 @@ function sortDiscover(req){
 /* Discover */
 module.exports.discover = function(req, res, next) {
   if(loggedIn(req)){
-      sortDiscover(req);
-      res.render('discover', { title: 'Discover', user: req.user, targetUser: sortDiscover(req)});
+      var targetUser = sortDiscover(req);
+      console.log(targetUser._id);
+      res.render('discover', { title: 'Discover', user: req.user, targetUser: targetUser._id});
   }
   else{
     res.redirect("/");
