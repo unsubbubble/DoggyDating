@@ -44,7 +44,7 @@ function sortDiscover(req){
         console.log(matches);
 
         for(var match in matches){
-            console.log(match);
+            console.log("match" + match);
 
             if(!bestMatch){
               bestMatch = match;
@@ -54,6 +54,10 @@ function sortDiscover(req){
             }
         }
 
+        console.log("targetUser: ");
+        console.log(bestMatch);
+        console.log(bestMatch._id);
+
         return bestMatch;
     });
 }
@@ -61,11 +65,7 @@ function sortDiscover(req){
 /* Discover */
 module.exports.discover = function(req, res, next) {
   if(loggedIn(req)){
-      var targetUser = sortDiscover(req);
-      console.log("targetUser: ");
-      console.log(targetUser);
-      console.log(targetUser._id);
-      res.render('discover', { title: 'Discover', user: req.user, targetUser: targetUser._id});
+      res.render('discover', { title: 'Discover', user: req.user, targetUser: sortDiscover(req)._id});
   }
   else{
     res.redirect("/");
