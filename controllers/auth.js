@@ -45,7 +45,7 @@ function sortDiscover(req, callback){
         invalidIds.push(ids[pastMatch].targetUser._id);
     }
 
-    console.log(ids);
+    console.log("InvalidIds: " + invalidIds);
     User.find({'_id': {$nin: invalidIds}}, function (err, matches) {
         if (err) return handleError(err);
 
