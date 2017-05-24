@@ -7,6 +7,7 @@ function discover(val, form) {
 
     var responseElement = document.getElementById(id);
     responseElement.value = val;
-    form.submit();
+    document.forms["discoverForm"].submit();
+
 }
 
