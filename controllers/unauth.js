@@ -102,9 +102,9 @@ module.exports.registerPost = function(req, res, next){
 					}
 					else{
 						
-						console.log(data, ' saved');
-						res.redirect('/');
-						
+						passport.authenicate('local')(req, res, function(){
+							res.redirect("/");
+						});
 					}
 				});
 			}
