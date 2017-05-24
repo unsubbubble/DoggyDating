@@ -37,27 +37,29 @@ function rateMatch(user, match){
 }
 
 function sortDiscover(req){
-    var matches = User.find({'_id': {$ne: req.user._id}});
-    var match;
-    var bestMatch;
-    console.log(matches);
-    for(var i in matches.all){
-      console.log(i);
-    }
-    // sets initial match
-    if(matches.hasNext()){
-      match = matches.next();
-      bestMatch = match;
-    }
+    User.find({'_id': {$ne: req.user._id}}, function (err, matches) {
+        if (err) return handleError(err);
+        var match;
+        var bestMatch;
+        console.log(matches);
+        for(var i in matches.all){
+            console.log(i);
+        }
+        // sets initial match
+        if(matches.hasNext()){
+            match = matches.next();
+            bestMatch = match;
+        }
 
-    while(matches.hasNext()){
-      match = matches.next();
-      if(rateMatch(req.user, match) > rateMatch(req.user, bestMatch)){
-        bestMatch = match;
-      }
-    }
+        while(matches.hasNext()){
+            match = matches.next();
+            if(rateMatch(req.user, match) > rateMatch(req.user, bestMatch)){
+                bestMatch = match;
+            }
+        }
 
-    return bestMatch;
+        return bestMatch;
+    });
 }
 
 /* Discover */
