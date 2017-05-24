@@ -13,11 +13,15 @@ block content
 					tr
 						th Name
 						td
-							input.text-input(type="text", name="dog_name", value=user.dog, placeholder="Name", required)
+							input.text-input(type="text", name="dog_name", value=dog.name, placeholder="Name", required)
 					tr
 						th Age
 						td
-							input.text-input(type="number", name="dog_age", value=user.dog.age, placeholder="Age", required)
+							input.text-input(type="number", name="dog_age", value=dog.age, placeholder="Age", required)
+					tr
+						th Breed
+						td
+							input.text-input(type="text", name="dog_breed", value=dog.breed, placeholder="Breed", required)
 					tr
 						th Picture
 						td
