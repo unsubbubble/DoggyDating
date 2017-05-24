@@ -9,8 +9,6 @@ block content
 				img(src="images/dogs/2.jpg", alt="Dog Profile Picture")
 			div.col.col-6
 				h2 Dog's Profile
-				for(item in dog)
-					p #{item}
 
 				table.table-striped
 					tr
@@ -20,11 +18,11 @@ block content
 					tr
 						th Age
 						td
-							input.text-input(type="number", name="dog_age", value=dog.age, placeholder="Age", required)
+							input.text-input(type="number", name="dog_age", value=${dog.age}, placeholder="Age", required)
 					tr
 						th Breed
 						td
-							input.text-input(type="text", name="dog_breed", value=dog.breed, placeholder="Breed", required)
+							input.text-input(type="text", name="dog_breed", value=${dog.breed}, placeholder="Breed", required)
 					tr
 						th Picture
 						td
