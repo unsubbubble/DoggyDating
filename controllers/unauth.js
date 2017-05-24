@@ -84,7 +84,9 @@ module.exports.registerPost = function(req, res, next){
 				});
 			}
 			else{
-				res.render('register_dog', { title: 'DoggyDates - Dog Registration', user: newUser._id});
+				passport.authenticate('local')(req, res, function () {
+				  res.redirect('/register_dog');
+				});
 			};
 		
 		});
@@ -182,7 +184,7 @@ module.exports.registerDogPost = function(req, res, next){
 							}
 							else{
 								console.log(data, ' saved');
-								res.render('discover', { title: 'DoggyDates'});
+								res.redirect('discover');
 							};
 						});
 					}
