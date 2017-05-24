@@ -13,11 +13,11 @@ block content
 					tr
 						th Name
 						td
-							input.text-input(type="text", name="dog_name", value="Puppy", placeholder="Name", required)
+							input.text-input(type="text", name="dog_name", value=user.dog.name, placeholder="Name", required)
 					tr
 						th Age
 						td
-							input.text-input(type="number", name="dog_age", value="4", placeholder="Age", required)
+							input.text-input(type="number", name="dog_age", value=user.dog.age, placeholder="Age", required)
 					tr
 						th Picture
 						td
@@ -29,19 +29,15 @@ block content
 					tr
 						th Name
 						td
-							input.text-input(type="text", name="name", value="John Smith", placeholder="Name", required)
+							input.text-input(type="text", name="name", value=user.name, placeholder="Name", required)
 					tr
 						th Date of Birth
 						td
-							input.input(type="date", name="date", value="2000-01-01", required)
-					tr
-						th Email
-						td
-							input.text-input(type="email", name="email", value="puppylover@gmail.com", placeholder="Email", required)
+							input.input(type="date", name="date", value=user.dateOfBirth, required)
 					tr
 						th Suburb
 						td
-							input.text-input(type="text", name="address", value="Perth", placeholder="Address", required)
+							input.text-input(type="text", name="address", value=user.suburb, placeholder="Address", required)
 		div.row
 			div.col.col-9
 			div.col.col-2
