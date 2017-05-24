@@ -91,7 +91,7 @@ module.exports.registerPost = function(req, res, next){
 				});
 				
 				console.log(newUser);
-				newUser.save(function(err, data){
+				User.register(newUser, req.body.password1, function(err, data){
 					if(err){
 						console.log(err);
 						res.status(500);
@@ -101,11 +101,9 @@ module.exports.registerPost = function(req, res, next){
 						});
 					}
 					else{
-						
-						passport.authenicate('local')(req, res, function(){
-							res.redirect("/");
-						});
-					}
+						res.redirect("/");
+					};
+				
 				});
 			}
 		});
