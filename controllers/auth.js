@@ -40,8 +40,9 @@ function sortDiscover(req, callback){
   Matches.find({'user._id': req.user._id}, 'targetUser._id', function(err, ids){
     var invalidIds = [];
     invalidIds.push(req.user._id);
-
+    console.log(ids);
     for(var pastMatch in ids){
+      console.log(pastMatch);
         invalidIds.push(ids[pastMatch].targetUser._id);
     }
 
