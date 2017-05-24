@@ -38,8 +38,15 @@ function rateMatch(user, match){
 
 function sortDiscover(req, callback){
   Matches.find({'user._id': req.user._id}, 'targetUser._id', function(err, ids){
+    var invalidIds = [];
+    invalidIds.push(req.user._id);
+
+    for(var pastMatch in ids){
+        invalidIds.push(ids[pastMatch].targetUser._id);
+    }
+
     console.log(ids);
-    User.find({'_id': {$ne: ids + req.user._id}}, function (err, matches) {
+    User.find({'_id': {$nin: invalidIds}}, function (err, matches) {
         if (err) return handleError(err);
 
         var bestMatch = null;
