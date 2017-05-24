@@ -9,6 +9,9 @@ block content
 				img(src="images/dogs/2.jpg", alt="Dog Profile Picture")
 			div.col.col-6
 				h2 Dog's Profile
+				for(item in dog)
+					p #{item}
+
 				table.table-striped
 					tr
 						th Name
