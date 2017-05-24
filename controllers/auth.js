@@ -41,7 +41,9 @@ function sortDiscover(req){
     var match;
     var bestMatch;
 
-    console.log(matches);
+    for(var i in matches){
+      console.log(i);
+    }
     // sets initial match
     if(matches.hasNext()){
       match = matches.next();
