@@ -14,6 +14,7 @@ var userSchema = new mongoose.Schema({
 	dateCreated:{type:Date, required:true},
 	dateLastEdited:{type:Date, required:true, default:Date.now},
 	isDeleted:{type:Boolean, required:true, default:false},
+	registrationComplete:{type: Boolean, required: true, default: false},
 	
 });
 	

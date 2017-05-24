@@ -170,10 +170,22 @@ module.exports.registerDogPost = function(req, res, next){
 						});
 					}
 					else{
-						console.log(data, ' saved');
-						res.render('discover', { title: 'DoggyDates'});
-					};
-				
+						user.registrationComplete = true;
+						user.save(function(err, data){
+						if(err){
+							console.log(err);
+							res.status(500);
+							res.render('error', {
+								message:err.message,
+								error:err
+							});
+						}
+						else{
+							console.log(data, ' saved');
+							res.render('discover', { title: 'DoggyDates'});
+						};
+						
+					});
 				});
 			}
 		});
