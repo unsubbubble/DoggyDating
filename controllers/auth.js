@@ -44,13 +44,13 @@ function sortDiscover(req){
         console.log(matches);
 
         for(var match in matches){
-            console.log("match" + match);
+            console.log("match" + matches[match]);
 
             if(!bestMatch){
-              bestMatch = match;
+              bestMatch = matches[match];
             }
-            else if(rateMatch(req.user, match) > rateMatch(req.user, bestMatch)){
-                bestMatch = match;
+            else if(rateMatch(req.user, matches[match]) > rateMatch(req.user, bestMatch)){
+                bestMatch = matches[match];
             }
         }
 
