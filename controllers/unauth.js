@@ -1,8 +1,5 @@
 var mongoose = require('mongoose');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-
-
 var User = mongoose.model('User');
 var Dog = mongoose.model('Dog');
 
@@ -65,19 +62,7 @@ module.exports.registerPost = function(req, res, next){
 		});
 	}
 	else{
-		var newUser = new User({
-			email: req.body.email,
-			username: req.body.email,
-			name: req.body.name,
-			dateOfBirth: new Date(req.body.dob),
-			gender: req.body.gender,
-			profilePicture: req.body.profile_picture,
-			suburb: req.body.address,
-			dateCreated: Date.now()
-		});
-		
-		console.log(newUser);
-		User.register(newUser, req.body.password1, function(err, data){
+		Dog.findOne({_id:req.body.dog}, function(err, dog){ 
 			if(err){
 				console.log(err);
 				res.status(500);
@@ -87,19 +72,39 @@ module.exports.registerPost = function(req, res, next){
 				});
 			}
 			else{
-				passport.use(new LocalStrategy({
-						usernameField: 'email',
-						passwordField: 'password1',
-					}, function(username, password, done) {
-						passport.authenticate('local')(req, res, function () {
-							res.redirect('/register-dog');
+				var newUser = new User({
+					email: req.body.email,
+					username: req.body.email,
+					name: req.body.name,
+					dateOfBirth: new Date(req.body.dob),
+					gender: req.body.gender,
+					profilePicture: req.body.profile_picture,
+					suburb: req.body.address,
+					
+					dog: dog,
+					
+					dateCreated: Date.now(),
+				});
+				
+				console.log(newUser);
+				newUser.save(function(err, data){
+					if(err){
+						console.log(err);
+						res.status(500);
+						res.render('error', {
+							message:err.message,
+							error:err
 						});
-					}	
-				))
-			};
-		
+					}
+					else{
+						
+						console.log(data, ' saved');
+						res.redirect('/', {});
+						
+					}
+				});
+			}
 		});
-		
 	}
 };
 
@@ -149,7 +154,19 @@ module.exports.registerDogPost = function(req, res, next){
 		});
 	}
 	else{
-		User.findOne({_id:req.body.user}, function(err, user){ 
+		var newDog = new Dog({
+			name: req.body.name,
+			age: new Number(req.body.age),
+			gender: req.body.gender,
+			picture: req.body.profile_picture,
+			breed: req.body.breed,
+			owner: user,
+			
+			dateCreated: Date.now()
+		});
+				
+		console.log(newDog);
+		newDog.save(function(err, data){
 			if(err){
 				console.log(err);
 				res.status(500);
@@ -159,45 +176,10 @@ module.exports.registerDogPost = function(req, res, next){
 				});
 			}
 			else{
-				var newDog = new Dog({
-					name: req.body.name,
-					age: new Number(req.body.age),
-					gender: req.body.gender,
-					picture: req.body.profile_picture,
-					breed: req.body.breed,
-					owner: user,
-					
-					dateCreated: Date.now()
-				});
 				
-				console.log(newDog);
-				newDog.save(function(err, data){
-					if(err){
-						console.log(err);
-						res.status(500);
-						res.render('error', {
-							message:err.message,
-							error:err
-						});
-					}
-					else{
-						user.registrationComplete = true;
-						user.save(function(err, data){
-							if(err){
-								console.log(err);
-								res.status(500);
-								res.render('error', {
-									message:err.message,
-									error:err
-								});
-							}
-							else{
-								console.log(data, ' saved');
-								res.redirect('discover');
-							};
-						});
-					}
-				});
+				console.log(data, ' saved');
+				res.redirect('register', {dog: newDog._id});
+				
 			}
 		});
 	}

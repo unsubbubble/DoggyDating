@@ -1,6 +1,21 @@
 var mongoose = require('mongoose');
 var passportLocalMongoose = require('passport-local-mongoose');
 
+
+var dogSchema = new mongoose.Schema({
+	name:{type:String, required:true},
+	age:{type:Number, required:true},
+	picture:{type:String, required:true},
+	gender:{type:String, required:true},
+	breed:{type:String, required:true},
+	
+	dateCreated:{type:Date, required:true},
+	dateLastEdited:{type:Date, required:true, default:Date.now},
+});
+
+var Dog = mongoose.model('Dog', dogSchema);
+
+
 var userSchema = new mongoose.Schema({
 	email:{type:String, required:true},
 	username:{type:String, required:true},
@@ -11,30 +26,16 @@ var userSchema = new mongoose.Schema({
 	//phoneNumber:{type:String, required:true},
 	suburb:{type:String, required:true},
 	
+	dog:{type:[dogSchema], required:true},
+	
 	dateCreated:{type:Date, required:true},
 	dateLastEdited:{type:Date, required:true, default:Date.now},
 	isDeleted:{type:Boolean, required:true, default:false},
-	registrationComplete:{type: Boolean, required: true, default: false},
 	
 });
 	
 userSchema.plugin(passportLocalMongoose);
 var User = mongoose.model('User', userSchema);
-
-var dogSchema = new mongoose.Schema({
-	name:{type:String, required:true},
-	age:{type:Number, required:true},
-	picture:{type:String, required:true},
-	gender:{type:String, required:true},
-	breed:{type:String, required:true},
-	
-	owner:{type:[userSchema], required:true},
-	
-	dateCreated:{type:Date, required:true},
-	dateLastEdited:{type:Date, required:true, default:Date.now},
-});
-
-var Dog = mongoose.model('Dog', dogSchema);
 
 
 var matchSchema = new mongoose.Schema({
