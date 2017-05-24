@@ -155,10 +155,10 @@ module.exports.messages = function(req, res, next) {
 module.exports.profile = function(req, res, next) {
     if(loggedIn(req)) {
         console.log("Dog: " + req.user.dog);
-        console.log("Dog name: " + req.user.dog.name);
-        console.log("dog age: " + req.user.dog_age);
+        console.log("Dog name: " + req.user.dog[0].name);
+        console.log("dog age: " + req.user.dog[0].age);
 
-        res.render('profile', {user: req.user, dog: req.user.dog});
+        res.render('profile', {user: req.user});
     }
     else{
         res.redirect("/");
