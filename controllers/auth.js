@@ -153,7 +153,12 @@ module.exports.messages = function(req, res, next) {
 
 /* Profile */
 module.exports.profile = function(req, res, next) {
-  res.render('profile', { title: 'Profile' });
+    if(loggedIn(req)) {
+        res.render('profile', {user: req.user});
+    }
+    else{
+        res.redirect("/");
+    }
 };
 
 
