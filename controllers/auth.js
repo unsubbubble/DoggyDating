@@ -37,16 +37,16 @@ function rateMatch(user, match){
 }
 
 function sortDiscover(req, callback){
-  Matches.find({'user._id': req.user._id}, 'targetUser._id', function(err, ids){
+  Matches.find({'user': req.user._id}, 'targetUser', function(err, ids){
     var invalidIds = [];
     invalidIds.push(req.user._id);
     console.log(ids);
     for(var pastMatch in ids){
       console.log(pastMatch);
-      console.log(ids[pastMatch].targetUser._id);
+      console.log(ids[pastMatch].targetUser);
       console.log(ids[pastMatch]['targetUser']);
 
-      invalidIds.push(ids[pastMatch].targetUser._id);
+      invalidIds.push(ids[pastMatch].targetUser);
     }
 
     console.log("InvalidIds: " + invalidIds);
@@ -124,8 +124,8 @@ module.exports.discoverPost = function(req, res, next) {
           else{
               var newMatch = new Matches({
                   response: req.body.response,
-                  user: req.user,
-                  targetUser: targetUser,
+                  user: req.user._id,
+                  targetUser: targetUser._id,
                   dateCreated: Date.now()
               });
               console.log(newMatch);
