@@ -40,8 +40,8 @@ function sortDiscover(req){
     var matches = User.find({'_id': {$ne: req.user._id}});
     var match;
     var bestMatch;
-
-    for(var i in matches){
+    console.log(matches);
+    for(var i in matches.all){
       console.log(i);
     }
     // sets initial match
