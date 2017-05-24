@@ -19,10 +19,10 @@ block content
 								input(type="hidden", id="id_response", name="response")
 								input(type="hidden", name="targetUser", value=targetUser)
 							div.tall-col.col-2
-								a(href="#", onclick="discover('reject');")
+								a(href="#", onclick="discover('reject', this.form);")
 									span.fa.fa-times.fa-extra-big
 							div.tall-col.col-2
-								a(href="#", onclick="discover('accept');")
+								a(href="#", onclick="discover('accept', this.form);")
 									span.fa.fa-heart.fa-extra-big.fa-red
 			div.tall-col.col-4
 			
