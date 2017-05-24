@@ -41,11 +41,8 @@ function sortDiscover(req, callback){
         if (err) return handleError(err);
 
         var bestMatch = null;
-        console.log(matches);
 
         for(var match in matches){
-            console.log("match" + matches[match]);
-
             if(!bestMatch){
               bestMatch = matches[match];
             }
@@ -53,10 +50,6 @@ function sortDiscover(req, callback){
                 bestMatch = matches[match];
             }
         }
-
-        console.log("targetUser: ");
-        console.log(bestMatch);
-        console.log(bestMatch._id);
 
         callback(bestMatch);
     });
@@ -66,8 +59,7 @@ function sortDiscover(req, callback){
 module.exports.discover = function(req, res, next) {
   if(loggedIn(req)){
       sortDiscover(req, function(targetUser){
-        console.log(targetUser);
-          res.render('discover', { title: 'Discover', user: req.user, targetUser: targetUser})
+          res.render('discover', { title: 'Discover', user: req.user, targetUser: targetUser._id})
       });
   }
   else{
