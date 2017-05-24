@@ -1,6 +1,7 @@
 extends auth_base.jade
 
 block content
+	script(src="js/discover.js")
 	if(user)
 		h1 You are currently logged in as #{user.username}
 	div.dog-discover-profile
