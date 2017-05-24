@@ -8,22 +8,26 @@ block content
 		div.row
 			div.tall-col.col-4
 			div.tall-col.col-4
-				h2.center-text Find playmates in your area!
-				br
-				div.discover-container
-					div.img-container
-						img(id="id_discover_image", src="images/dogs/1.jpg", alt="Dog Profile Picture")
-					div.row
-						form(method="post", action="/discover", name="discoverForm")
-							div.tall-col.col-1
-								input(type="hidden", id="id_response", name="response")
-								input(type="hidden", name="targetUser", value=targetUser)
-							div.tall-col.col-2
-								a(href="#", onclick="discover('reject');")
-									span.fa.fa-times.fa-extra-big
-							div.tall-col.col-2
-								a(href="#", onclick="discover('accept');")
-									span.fa.fa-heart.fa-extra-big.fa-red
+				if(targetUser)
+					h2.center-text Find playmates in your area!
+					br
+					div.discover-container
+						div.img-container
+							img(id="id_discover_image", src="images/dogs/1.jpg", alt="Dog Profile Picture")
+						div.row
+							form(method="post", action="/discover", name="discoverForm")
+								div.tall-col.col-1
+									input(type="hidden", id="id_response", name="response")
+									input(type="hidden", name="targetUser", value=targetUser)
+								div.tall-col.col-2
+									a(href="#", onclick="discover('reject');")
+										span.fa.fa-times.fa-extra-big
+								div.tall-col.col-2
+									a(href="#", onclick="discover('accept');")
+										span.fa.fa-heart.fa-extra-big.fa-red
+				else
+					h2.center-text There aren't any playmates in you area :(
+
 			div.tall-col.col-4
 			
 	script(src="js/discover.js")

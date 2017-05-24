@@ -37,14 +37,16 @@ function rateMatch(user, match){
 }
 
 function sortDiscover(req, callback){
-    User.find({'_id': {$ne: req.user._id}}, function (err, matches) {
+  Matches.find({'user._id': req.user._id}, 'targetUser._id', function(err, ids){
+    console.log(ids);
+    User.find({'_id': {$ne: ids + req.user._id}}, function (err, matches) {
         if (err) return handleError(err);
 
         var bestMatch = null;
 
         for(var match in matches){
             if(!bestMatch){
-              bestMatch = matches[match];
+                bestMatch = matches[match];
             }
             else if(rateMatch(req.user, matches[match]) > rateMatch(req.user, bestMatch)){
                 bestMatch = matches[match];
@@ -53,6 +55,8 @@ function sortDiscover(req, callback){
 
         callback(bestMatch);
     });
+  });
+
 }
 
 /* Discover */
