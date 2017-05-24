@@ -160,7 +160,6 @@ module.exports.registerDogPost = function(req, res, next){
 			gender: req.body.gender,
 			picture: req.body.profile_picture,
 			breed: req.body.breed,
-			owner: user,
 			
 			dateCreated: Date.now()
 		});
