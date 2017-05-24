@@ -39,7 +39,9 @@ function rateMatch(user, match){
 function sortDiscover(req){
     User.find({'_id': {$ne: req.user._id}}, function (err, matches) {
         if (err) return handleError(err);
+
         var bestMatch = null;
+        console.log(matches);
 
         for(var match in matches){
             console.log(match);
