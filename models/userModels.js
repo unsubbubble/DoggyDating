@@ -23,7 +23,7 @@ var userSchema = new mongoose.Schema({
 	dateOfBirth:{type:String, required:true},
 	gender:{type:String, required:true},
 	profilePicture:{
-		data: Buffer, contentType: String, required:true
+		data: Buffer, contentType: String,
 	},
 	//phoneNumber:{type:String, required:true},
 	suburb:{type:String, required:true},
