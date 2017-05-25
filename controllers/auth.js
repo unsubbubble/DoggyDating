@@ -79,6 +79,9 @@ function checkMatch(userID, targetID, callback){
 function getMessages(userId, targetId, callback){
     Messages.find({userFrom: {$in: [userId, targetId]}, userTo: {$in: [userId, targetId]}}, {sort:{dateCreated: 1}},
     function(err, messages){
+        console.log("userId: " + userId);
+        console.log("targetId: " + targetId);
+        console.log(messages);
         callback(messages);
     })
 }
@@ -230,6 +233,7 @@ module.exports.messages = function(req, res, next) {
                     checkMatch(req.user._id, id, function(isMatch){
                         if(isMatch){
                             getMessages(req.user._id, id, function(messages){
+                                console.log(messages);
                                 res.render('messages', { matches: users, messages: messages, target: id });
                             })
                         }
