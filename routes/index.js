@@ -32,6 +32,7 @@ router.post('/discover', ctrlAuth.discoverPost);
 router.get('/messages', ctrlAuth.messages);
 
 /* GET profile page */
+router.post('/profile', upload.single('dog_picture'), ctrlAuth.proflePost);
 router.get('/profile', ctrlAuth.profile);
 
 module.exports = router;
