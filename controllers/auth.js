@@ -151,7 +151,7 @@ module.exports.messages = function(req, res, next) {
 /* Profile */
 module.exports.profile = function(req, res, next) {
     if(loggedIn(req)) {
-        var dob = req.user.dateOfBirth.toISOString().slice(0, 10);
+        var dob = new Date(req.user.dateOfBirth).toISOString().slice(0, 10);
         res.render('profile', {user: req.user, dob: dob});
     }
     else{
