@@ -18,10 +18,14 @@ block content
 				br
 				div.messages(id="id_messages")
 					if(messages)
+						- for(var message = 0; message < messages.length ; message++)
 						br
-						span.message-r Hi! Do you want to play?
-						br
-						span.message-s Sure!
+						if(messages[message].userFrom == target)
+							span.message-r #{messages[message].message}
+
+						else
+							span.message-s #{messages[message].message}
+
 					else
 						if(target)
 							h2.center-text You have no messages.
@@ -30,8 +34,7 @@ block content
 				div.messages-send
 					div.row
 						form(method="post", action="/messages")
-							div.tall-col.col-1
-								input(type="hidden", name="userTo", value=target)
+							input(type="hidden", name="userTo", value=target)
 							div.tall-col.col-9
 								input.text-input(type="text", name="message", placeholder="Type a message...")
 							div.tall-col.col-1
