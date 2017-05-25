@@ -177,41 +177,46 @@ function validateProfileUpdate(req){
 
 module.exports.proflePost = function(req, res, next){
     if(loggedIn(req)){
-        var updateUser = req.user;
 
-        updateUser.dog[0].name = req.body.dog_name;
-        updateUser.dog[0].age = req.body.dog_age;
-        updateUser.dog[0].breed = req.body.dog_breed;
-        updateUser.dog[0].dateLastEdited = Date.now();
+        if(validateProfileUpdate(req)){
+            var updateUser = req.user;
 
-        if(req.file){
-            updateUser.dog[0].picture.contentType = req.file.mimetype;
-            updateUser.dog[0].picture.data = req.file.buffer.toString("base64");
+            updateUser.dog[0].name = req.body.dog_name;
+            updateUser.dog[0].age = req.body.dog_age;
+            updateUser.dog[0].breed = req.body.dog_breed;
+            updateUser.dog[0].dateLastEdited = Date.now();
+
+            if(req.file){
+                updateUser.dog[0].picture.contentType = req.file.mimetype;
+                updateUser.dog[0].picture.data = req.file.buffer.toString("base64");
+            }
+
+            updateUser.name = req.body.name;
+            updateUser.dateOfBirth = req.body.date;
+            updateUser.suburb = req.body.address;
+            updateUser.dateLastEdited = Date.now();
+
+            updateUser.save(function(err, data){
+                if(err){
+                    console.log(err);
+                    res.status(500);
+                    res.render('error', {
+                        message:err.message,
+                        error:err
+                    });
+                }
+                else{
+
+                    res.redirect("/profile");
+
+                }
+            });
+        }
+        else{
+            // TODO: Add error handling.
+            res.redirect("/profile");
         }
 
-        updateUser.name = req.body.name;
-        updateUser.dateOfBirth = req.body.date;
-        updateUser.suburb = req.body.address;
-        updateUser.dateLastEdited = Date.now();
-
-        console.log(updateUser);
-
-        updateUser.save(function(err, data){
-            if(err){
-                console.log(err);
-                res.status(500);
-                res.render('error', {
-                    message:err.message,
-                    error:err
-                });
-            }
-            else{
-
-                console.log(data, ' saved');
-                res.redirect("/profile");
-
-            }
-        });
 
 
     }
