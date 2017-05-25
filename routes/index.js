@@ -1,6 +1,5 @@
 var express = require('express');
 var passport = require('passport');
-var multer = require("multer");
 var router = express.Router();
 
 var ctrlUnAuth = require('../controllers/unauth');
@@ -14,10 +13,6 @@ router.post('/login', passport.authenticate('local'), ctrlUnAuth.login);
 router.get('/logout', ctrlAuth.logout);
 
 /* GET registration page. */
-router.use(multer({dest: './uploads/', rename: function(fieldname, filename){
-    return filename;
-    }
-}));
 router.get('/register', ctrlUnAuth.register);
 router.post('/register', ctrlUnAuth.registerPost);
 

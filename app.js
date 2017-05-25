@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var db = require('./models/db');
 
+var multer = require("multer");
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -32,13 +34,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('express-session')({
 	secret: 'CITS3403',
 	resave: false,
-	saveUninitialized: false,
+	saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
 app.use('/users', users);
+
+app.use(multer({dest: './uploads/', rename: function(fieldname, filename){
+    return filename;
+}
+}));
 
 var User = mongoose.model('User');
 passport.use(new LocalStrategy(User.authenticate()));
