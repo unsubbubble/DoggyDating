@@ -194,6 +194,8 @@ module.exports.proflePost = function(req, res, next){
         updateUser.suburb = req.body.suburb;
         updateUser.dateLastEdited = Date.now();
 
+        console.log(updateUser);
+
         updateUser.update(function(err, data){
             if(err){
                 console.log(err);
