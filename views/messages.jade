@@ -20,12 +20,10 @@ block content
 					if(messages && messages.length > 0)
 						- for(var message = 0; message < messages.length ; message++)
 						br
-						p #{messages[message]}
-						//if(messages[message].userFrom == target)
-						//	span.message-r #{messages[message].message}
-						//
-						//else
-						//	span.message-s #{messages[message].message}
+						if(messages[message].userFrom == target)
+							span.message-r #{messages[message].message}
+						else
+							span.message-s #{messages[message].message}
 
 					else
 						if(target)
