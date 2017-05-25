@@ -3,7 +3,8 @@ var passport = require('passport');
 var router = express.Router();
 
 var multer = require("multer");
-var upload = multer();
+var storage = multer.memoryStorage();
+var upload = multer({ storage: storage });
 
 var ctrlUnAuth = require('../controllers/unauth');
 var ctrlAuth = require('../controllers/auth');
