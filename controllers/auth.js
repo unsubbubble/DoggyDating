@@ -196,7 +196,7 @@ module.exports.proflePost = function(req, res, next){
 
         console.log(updateUser);
 
-        updateUser.update(function(err, data){
+        updateUser.save(function(err, data){
             if(err){
                 console.log(err);
                 res.status(500);
