@@ -91,7 +91,7 @@ module.exports.registerPost = function(req, res, next){
 					dateCreated: Date.now()
 				});
 
-				newUser.profilePicture.data = req.file.buffer;
+				newUser.profilePicture.data = req.file.buffer.toString("base64");
 				newUser.profilePicture.contentType = req.file.mimetype;
 				
 				console.log(newUser);
@@ -165,7 +165,7 @@ module.exports.registerDogPost = function(req, res, next){
 			dateCreated: Date.now()
 		});
 
-        newDog.picture.data = req.file.buffer;
+        newDog.picture.data = req.file.buffer.toString("base64");
         newDog.picture.contentType = req.file.mimetype;
 				
 		console.log(newDog);

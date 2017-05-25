@@ -6,7 +6,7 @@ var dogSchema = new mongoose.Schema({
 	name:{type:String, required:true},
 	age:{type:Number, required:true},
 	picture:{
-		data: Buffer, contentType: String
+		data: String, contentType: String
 	},
 	gender:{type:String, required:true},
 	breed:{type:String, required:true},
@@ -25,7 +25,7 @@ var userSchema = new mongoose.Schema({
 	dateOfBirth:{type:String, required:true},
 	gender:{type:String, required:true},
 	profilePicture:{
-		data: Buffer, contentType: String,
+		data: String, contentType: String,
 	},
 	//phoneNumber:{type:String, required:true},
 	suburb:{type:String, required:true},
