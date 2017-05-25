@@ -4,8 +4,9 @@ block content
     script(src="js/discover.js")
     if(!matches)
         h2.center-text You don't have any matches :(
-
-    - for(match in matches)
+    else
+        h2.center-text #{matches}
+    - for(var match = 0; match < matches.length ; match++)
     h2.center-text #{match}
     //div.dog-discover-profile
     //    div.row
