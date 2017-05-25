@@ -268,6 +268,10 @@ function validateMessage(req){
 }
 
 module.exports.messagesPost = function(req, res, next){
+    var id;
+    if(req.query){
+        id = req.query.id;
+    }
     if(loggedIn(req)){
         if(validateMessage(req)){
             var newMessage = new Messages({
@@ -289,13 +293,13 @@ module.exports.messagesPost = function(req, res, next){
                 else {
 
                     console.log(data, ' saved');
-                    res.redirect('/messages')
+                    res.redirect('/messages?id=' + id)
 
                 }
             })
         }
         else{
-            res.redirect('/messages')
+            res.redirect('/messages?id=' + id)
         }
     }else{
         res.redirect('/');

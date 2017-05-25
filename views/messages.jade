@@ -20,18 +20,13 @@ block content
 					- if(messages && messages.length > 0){
 						- for(var message = 0; message < messages.length ; message++){
 						br
-						br
-						br
 						-if(messages[message].userFrom == target){
 							div.row
-								div.tall-col-5
-									span.message-r #{messages[message].message}
+								span.message-r #{messages[message].message}
 						-}
 						-else{
 							div.row
-								div.tall-col.col-5
-								div.tall-col.col-5
-									span.message-s #{messages[message].message}
+								span.message-s #{messages[message].message}
 						- }
 						-}
 					-}
