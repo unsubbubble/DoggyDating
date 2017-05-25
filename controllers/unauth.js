@@ -31,7 +31,7 @@ function validateRegistration(req){
 		valid = false;
 	}
 	
-	if(!req.body.dob){
+	if(!req.body.dob || isNaN(Date.parse(req.body.dob))){
 		valid = false;
 	}
 	

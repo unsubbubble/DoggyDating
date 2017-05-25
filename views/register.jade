@@ -25,6 +25,8 @@ block content
 					span.error(id="id_name_error")
 					input.text-input(id="id_name", type="text", name="name", placeholder="Name", required)
 					br
+					label Date of Birth
+					br
 					span.error(id="id_dob_error")
 					br
 					input(id="id_dob", type="date", name="dob", required)
@@ -51,4 +53,6 @@ block content
 					br
 					input(name="dog", type="hidden", value=dog)
 					button.btn.btn-primary.pull-right(onclick="validateForm(this.form)") Complete Registration
+
+	script(src="js/validation.js")
 			
