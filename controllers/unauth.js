@@ -92,7 +92,7 @@ module.exports.registerPost = function(req, res, next){
 					dateCreated: Date.now()
 				});
 
-				newUser.profilePicture.data = fs.readFileSync(req.files.profile_picture.path);
+				newUser.profilePicture.data = fs.readFileSync(req.file.buffer);
 				newUser.profilePicture.contentType = 'image/png';
 				
 				console.log(newUser);
@@ -148,7 +148,7 @@ function validateRegistrationDog(req){
 }
 
 module.exports.registerDogPost = function(req, res, next){
-	console.log(req);
+	console.log(req.file);
 	if(!validateRegistrationDog(req)){
 		res.status(500);
 		res.render('error', {
