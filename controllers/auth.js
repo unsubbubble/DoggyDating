@@ -2,9 +2,85 @@
 var mongoose = require('mongoose');
 var Matches = mongoose.model('Matches');
 var User = mongoose.model('User');
+var Messages = mongoose.model('Messages');
 
 function loggedIn(req){
   return req.user;
+}
+
+function getMatches(req, callback){
+    // get user IDs you have accepted
+    Matches.find({'user': req.user._id, response:'accept'}, 'targetUser', function(err, yourMatches){
+        var matchIds = [];
+
+        for(var yourMatch in yourMatches){
+            matchIds.push(yourMatches[yourMatch].targetUser);
+        }
+
+        // filter for user IDs who have accepted you
+        Matches.find({'user': {$in: matchIds}, targetUser: req.user._id, response:'accept'}, 'user', function(err, matches){
+            var matchIds = [];
+
+            for(var match in matches){
+                matchIds.push(matches[match].user);
+            }
+
+            // get user objects for matches
+            User.find({'_id': {$in: matchIds}}, function(err, users){
+                callback(users);
+            });
+        });
+
+    });
+}
+
+
+function checkMatch(userID, targetID, callback){
+    // check if you matched them
+    Matches.findOne({user:userID, targetUser: targetID}, function(err, match){
+        if(err){
+            console.log(err);
+            res.status(500);
+            res.render('error', {
+                message:err.message,
+                error:err
+            });
+        }
+        else{
+            if(match && match.response === 'accept'){
+                //check if they matched you
+                Matches.findOne({user:userID, targetUser: targetID}, function(err, matchBack){
+                    if(err){
+                        console.log(err);
+                        res.status(500);
+                        res.render('error', {
+                            message:err.message,
+                            error:err
+                        });
+                    }
+                    else{
+                        if(matchBack && matchBack.response === "accept"){
+                            callback(true);
+                        }
+                        else{
+                            callback(false);
+                        }
+                    }
+                });
+            }
+            else{
+                callback(false);
+            }
+        }
+    });
+}
+
+
+function getMessages(userId, targetId, callback){
+    Messages.find({userFrom: {$in: [userId, targetId]}, userTo: {$in: [userId, targetId]}}, {sort:{dateCreated: 1}},
+    function(err, messages){
+        callback(messages);
+    })
 }
 
 function rateMatch(user, match){
@@ -70,6 +146,7 @@ module.exports.discover = function(req, res, next) {
   if(loggedIn(req)){
       sortDiscover(req, function(targetUser){
           res.render('discover', { title: 'Discover', user: req.user, targetUser: targetUser})
+
       });
   }
   else{
@@ -145,7 +222,80 @@ module.exports.discoverPost = function(req, res, next) {
 
 /* Messages */
 module.exports.messages = function(req, res, next) {
-  res.render('messages', { title: 'Messages' });
+    if(loggedIn(req)){
+        getMatches(req, function(users){
+            if(req.query){
+                var id = req.query.id;
+                if(id){
+                    checkMatch(req.user._id, id, function(isMatch){
+                        if(isMatch){
+                            getMessages(req.user._id, id, function(messages){
+                                res.render('messages', { matches: users, messages: messages, target: id });
+                            })
+                        }
+                        else{
+                            res.render('messages', { matches: users, target: id });
+                        }
+                    })
+
+                }
+                else{
+                    res.render('messages', { matches: users });
+                }
+            }
+            else{
+                res.render('messages', { matches: users });
+            }
+        });
+    }
+    else{
+        res.redirect('/');
+    }
+
+};
+
+function validateMessage(req){
+    var valid = true;
+    if(!req.body.message || !req.user || !req.body.userTo){
+        valid = false;
+    }
+
+    return valid;
+}
+
+module.exports.messagesPost = function(req, res, next){
+    if(loggedIn(req)){
+        if(validateMessage(req)){
+            var newMessage = new Messages({
+                message: req.body.message,
+                userFrom: req.user._id,
+                userTo: req.body.userTo,
+                dateCreated: Date.now()
+            });
+
+            newMessage.save(function(err, data) {
+                if (err) {
+                    console.log(err);
+                    res.status(500);
+                    res.render('error', {
+                        message: err.message,
+                        error: err
+                    });
+                }
+                else {
+
+                    console.log(data, ' saved');
+                    res.redirect('/messages')
+
+                }
+            })
+        }
+        else{
+            res.redirect('/messages')
+        }
+    }else{
+        res.redirect('/');
+    }
 };
 
 /* Profile */
@@ -230,29 +380,9 @@ module.exports.proflePost = function(req, res, next){
 
 module.exports.matches = function(req, res, next){
     if(loggedIn(req)){
-        // get user IDs you have accepted
-        Matches.find({'user': req.user._id, response:'accept'}, 'targetUser', function(err, yourMatches){
-            var matchIds = [];
-
-            for(var yourMatch in yourMatches){
-                matchIds.push(yourMatches[yourMatch].targetUser);
-            }
-
-            // filter for user IDs who have accepted you
-            Matches.find({'user': {$in: matchIds}, targetUser: req.user._id, response:'accept'}, 'user', function(err, matches){
-                var matchIds = [];
-
-                for(var match in matches){
-                    matchIds.push(matches[match].user);
-                }
-
-                // get user objects for matches
-                User.find({'_id': {$in: matchIds}}, function(err, users){
-                    res.render('matches', {matches: users});
-                });
-            });
-
-        });
+       getMatches(req, function(users){
+           res.render('matches', {matches: users});
+       });
     }
     else {
         res.redirect('/');
