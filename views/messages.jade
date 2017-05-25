@@ -23,10 +23,15 @@ block content
 						br
 						br
 						-if(messages[message].userFrom == target){
-							span.message-r #{messages[message].message}
+							div.row
+								div.tall-col-5
+									span.message-r #{messages[message].message}
 						-}
 						-else{
-							span.message-s #{messages[message].message}
+							div.row
+								div.tall-col.col-5
+								div.tall-col.col-5
+									span.message-s #{messages[message].message}
 						- }
 						-}
 					-}
