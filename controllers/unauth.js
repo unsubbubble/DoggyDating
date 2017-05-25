@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var passport = require('passport');
+var fs = require("fs");
+
 var User = mongoose.model('User');
 var Dog = mongoose.model('Dog');
 
@@ -82,13 +84,15 @@ module.exports.registerPost = function(req, res, next){
 					name: req.body.name,
 					dateOfBirth: new Date(req.body.dob),
 					gender: req.body.gender,
-					profilePicture: req.body.profile_picture,
 					suburb: req.body.address,
 					
 					dog: dog,
 					
-					dateCreated: Date.now(),
+					dateCreated: Date.now()
 				});
+
+				newUser.profilePicture.data = fs.readFileSync(req.files.profile_picture.path);
+				newUser.profilePicture.contentType = 'image/png';
 				
 				console.log(newUser);
 				User.register(newUser, req.body.password1, function(err, data){
@@ -102,7 +106,7 @@ module.exports.registerPost = function(req, res, next){
 					}
 					else{
 						res.redirect("/");
-					};
+					}
 				
 				});
 			}
