@@ -17,14 +17,15 @@ block content
 			div.messages-container
 				br
 				div.messages(id="id_messages")
-					if(messages.length > 0)
+					if(messages && messages.length > 0)
 						- for(var message = 0; message < messages.length ; message++)
 						br
-						if(messages[message].userFrom == target)
-							span.message-r #{messages[message].message}
-
-						else
-							span.message-s #{messages[message].message}
+						p #{messages[message]}
+						//if(messages[message].userFrom == target)
+						//	span.message-r #{messages[message].message}
+                        //
+						//else
+						//	span.message-s #{messages[message].message}
 
 					else
 						if(target)
