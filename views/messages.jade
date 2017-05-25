@@ -17,7 +17,7 @@ block content
 			div.messages-container
 				br
 				div.messages(id="id_messages")
-					if(messages)
+					if(messages.length > 0)
 						- for(var message = 0; message < messages.length ; message++)
 						br
 						if(messages[message].userFrom == target)
