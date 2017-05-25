@@ -77,13 +77,13 @@ function checkMatch(userID, targetID, callback){
 
 
 function getMessages(userId, targetId, callback){
-    Messages.find({$or:[{userFrom: userId, userTo: targetId}, {userFrom: targetId, userTo: userId}]},
+    Messages.find({$or:[{userFrom: userId, userTo: targetId}, {userFrom: targetId, userTo: userId}]}).sort('dateCreated').exec(
     function(err, messages){
         console.log("userId: " + userId);
         console.log("targetId: " + targetId);
         console.log(messages);
         callback(messages);
-    })
+    });
 }
 
 function rateMatch(user, match){

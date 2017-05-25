@@ -12,7 +12,6 @@ block content
 				div.col.col-2
 					a(href="?id=" + matches[match]._id) Owner: #{matches[match].name}
 
-
 		div.col.col-6
 			h2 Messages
 			div.messages-container
@@ -28,14 +27,15 @@ block content
 							h2.center-text You have no messages.
 						else
 							h2.center-text Please select a match to message.
-				div.messages-send.row
-					form(method="post", action="/messages")
-						div.tall-col.col-1
-							input(type="hidden", name="userTo", value=target)
-						div.tall-col.col-9
-							input.text-input(type="text", name="message", placeholder="Type a message...")
-						div.tall-col.col-1
-							button.btn.btn-primary Send
+				div.messages-send
+					div.row
+						form(method="post", action="/messages")
+							div.tall-col.col-1
+								input(type="hidden", name="userTo", value=target)
+							div.tall-col.col-9
+								input.text-input(type="text", name="message", placeholder="Type a message...")
+							div.tall-col.col-1
+								button.btn.btn-primary Send
 	link(href="stylesheets/messages.css", type="text/css", rel="stylesheet")
 
 					
