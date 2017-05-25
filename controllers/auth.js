@@ -242,6 +242,7 @@ module.exports.matches = function(req, res, next){
 
             // get user objects for matches
             User.find({'_id': {$in: matches}}, function(err, users){
+                console.log(users);
                 res.render('matches', {matches: users});
             });
         });
