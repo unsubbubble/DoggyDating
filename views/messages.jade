@@ -29,8 +29,9 @@ block content
 							h2.center-text Please select a match to message.
 				div.messages-send.row
 					form(method="post", action="/messages")
-						input(type="hidden", name="userTo", value=target)
-						div.tall-col.col-11
+						div.tall-col.col-1
+							input(type="hidden", name="userTo", value=target)
+						div.tall-col.col-9
 							input.text-input(type="text", name="message", placeholder="Type a message...")
 						div.tall-col.col-1
 							button.btn.btn-primary Send

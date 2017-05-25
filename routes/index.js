@@ -35,6 +35,7 @@ router.get('/matches', ctrlAuth.matches);
 
 /* GET messages page */
 router.get('/messages', ctrlAuth.messages);
+router.post('/messages', ctrlAuth.messagesPost);
 
 /* GET profile page */
 router.post('/profile', upload.single('dog_picture'), ctrlAuth.proflePost);
