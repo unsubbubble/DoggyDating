@@ -20,6 +20,8 @@ block content
 					- if(messages && messages.length > 0){
 						- for(var message = 0; message < messages.length ; message++){
 						br
+						br
+						br
 						-if(messages[message].userFrom == target){
 							span.message-r #{messages[message].message}
 						-}
@@ -38,7 +40,8 @@ block content
 				div.messages-send
 					div.row
 						form(method="post", action="/messages")
-							input(type="hidden", name="userTo", value=target)
+							div.tall-col.col-1
+								input(type="hidden", name="userTo", value=target)
 							div.tall-col.col-9
 								input.text-input(type="text", name="message", placeholder="Type a message...")
 							div.tall-col.col-1
