@@ -8,8 +8,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var db = require('./models/db');
 
-var multer = require("multer");
-
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -42,9 +40,6 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/users', users);
 
-app.use(
-    multer({dest: './uploads/'}).single('singleInputFileName')
-);
 
 var User = mongoose.model('User');
 passport.use(new LocalStrategy(User.authenticate()));

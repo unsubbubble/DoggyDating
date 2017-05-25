@@ -2,6 +2,9 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 
+var multer = require("multer");
+var upload = multer({dest: '../uploads/'});
+
 var ctrlUnAuth = require('../controllers/unauth');
 var ctrlAuth = require('../controllers/auth');
 
@@ -14,11 +17,11 @@ router.get('/logout', ctrlAuth.logout);
 
 /* GET registration page. */
 router.get('/register', ctrlUnAuth.register);
-router.post('/register', ctrlUnAuth.registerPost);
+router.post('/register', upload.single('avatar'), ctrlUnAuth.registerPost);
 
 /* GET dog registration page. */
 router.get('/register-dog', ctrlUnAuth.registerDog);
-router.post('/register-dog', ctrlUnAuth.registerDogPost);
+router.post('/register-dog', upload.single('avatar') ,ctrlUnAuth.registerDogPost);
 
 /* GET discover page */
 router.get('/discover', ctrlAuth.discover);
