@@ -68,7 +68,8 @@ module.exports.registerPost = function(req, res, next){
 		});
 	}
 	else{
-		Dog.findOne({_id:req.body.dog}, function(err, dog){ 
+		Dog.findOne({_id:req.body.dog}, function(err, dog){
+			console.log(req);
 			if(err){
 				console.log(err);
 				res.status(500);
@@ -147,7 +148,7 @@ function validateRegistrationDog(req){
 }
 
 module.exports.registerDogPost = function(req, res, next){
-	console.log(req.body);
+	console.log(req);
 	if(!validateRegistrationDog(req)){
 		res.status(500);
 		res.render('error', {
