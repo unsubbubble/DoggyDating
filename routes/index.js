@@ -28,6 +28,11 @@ router.post('/register-dog', upload.single('profile_picture') ,ctrlUnAuth.regist
 router.get('/discover', ctrlAuth.discover);
 router.post('/discover', ctrlAuth.discoverPost);
 
+
+/* GET matches page */
+router.get('/matches', ctrlAuth.matches);
+
+
 /* GET messages page */
 router.get('/messages', ctrlAuth.messages);
 

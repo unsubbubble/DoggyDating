@@ -226,6 +226,31 @@ module.exports.proflePost = function(req, res, next){
 };
 
 
+/* Matches page */
+
+module.exports.matches = function(req, res, next){
+    // get user IDs you have accepted
+    Matches.find({'user': req.user._id, response:'accept'}, 'targetUser', function(err, yourMatches){
+        var matchIds = [];
+
+        for(var yourMatch in yourMatches){
+            matchIds.push(yourMatches[yourMatch].targetUser);
+        }
+
+        // filter for user IDs who have accepted you
+        Matches.find({'user': {$in: matchIds}, targetUser: req.user._id, response:'accept'}, 'user', function(err, matches){
+
+            // get user objects for matches
+            User.find({'_id': {$in: matches}}, function(err, users){
+                res.render('matches', {matches: users});
+            });
+        });
+
+    });
+
+};
+
+
 /* Logout */
 module.exports.logout = function(req, res, next){
     req.logout();
