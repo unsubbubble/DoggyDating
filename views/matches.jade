@@ -6,18 +6,19 @@ block content
         h2.center-text You don't have any matches :(
 
     for(match in matches)
-        div.dog-discover-profile
-            div.row
-                div.tall-col.col-4
-                div.tall-col.col-4
-
-                        h2.center-text #{match.dog[0].name}
-                        br
-                        div.discover-container
-                            div.img-container
-                                img(id="id_discover_image", src="data:" + match.dog[0].picture.contentType + ";base64," + match.dog[0].picture.data, alt="Dog Profile Picture")
-                            div.row
-                div.tall-col.col-4
+        h2.center-text #{match}
+        //div.dog-discover-profile
+        //    div.row
+        //        div.tall-col.col-4
+        //        div.tall-col.col-4
+        //
+        //                h2.center-text #{match.dog[0].name}
+        //                br
+        //                div.discover-container
+        //                    div.img-container
+        //                        img(id="id_discover_image", src="data:" + match.dog[0].picture.contentType + ";base64," + match.dog[0].picture.data, alt="Dog Profile Picture")
+        //                    div.row
+        //        div.tall-col.col-4
 
     script(src="js/discover.js")
     link(href="stylesheets/discover.css", type="text/css", rel="stylesheet")
