@@ -13,7 +13,7 @@ block content
 					br
 					div.discover-container
 						div.img-container
-							img(id="id_discover_image", src="data:" + targetUser.profilePicture.contentType + ";base64," + targetUser.profilePicture.data, alt="Dog Profile Picture")
+							img(id="id_discover_image", src="data:" + targetUser.dog[0].picture.contentType + ";base64," + targetUser.dog[0].picture.data, alt="Dog Profile Picture")
 						div.row
 							form(method="post", action="/discover", name="discoverForm")
 								div.tall-col.col-1

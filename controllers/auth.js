@@ -151,7 +151,66 @@ module.exports.messages = function(req, res, next) {
 /* Profile */
 module.exports.profile = function(req, res, next) {
     if(loggedIn(req)) {
-       res.render('profile', {user: req.user});
+       res.render('profile', {user: req.user, dob: req.user.dateOfBirth.toISOString().slice(0, 10)});
+    }
+    else{
+        res.redirect("/");
+    }
+};
+
+function validateProfileUpdate(req){
+    var valid = true;
+    if(
+        !req.body.dog_name ||
+        !req.body.dog_age ||
+        !req.body.dog_breed ||
+        !req.body.name ||
+        !req.body.date ||
+        !req.body.address
+    ){
+        valid = false;
+    }
+
+    return valid;
+}
+
+module.exports.proflePost = function(req, res, next){
+    if(loggedIn(req)){
+        var updateUser = req.user;
+
+        updateUser.dog[0].name = req.body.dog_name;
+        updateUser.dog[0].age = req.body.dog_age;
+        updateUser.dog[0].breed = req.body.dog_breed;
+        updateUser.dog[0].dateLastEdited = Date.now();
+
+        if(req.file){
+            updateUser.dog[0].picture.contentType = req.file.mimetype;
+            updateUser.dog[0].picture.data = req.file.buffer.toString("base64");
+        }
+
+        updateUser.name = req.body.name;
+        updateUser.dateOfBirth = req.body.date;
+        updateUser.suburb = req.body.suburb;
+        updateUser.dateLastEdited = Date.now();
+
+        updateUser.update(function(err, data){
+            if(err){
+                console.log(err);
+                res.status(500);
+                res.render('error', {
+                    message:err.message,
+                    error:err
+                });
+            }
+            else{
+
+                console.log(data, ' saved');
+                res.redirect("/profile");
+
+            }
+        });
+
+
     }
     else{
         res.redirect("/");
