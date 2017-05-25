@@ -160,11 +160,13 @@ module.exports.registerDogPost = function(req, res, next){
 			name: req.body.name,
 			age: new Number(req.body.age),
 			gender: req.body.gender,
-			picture: req.body.profile_picture,
 			breed: req.body.breed,
 			
 			dateCreated: Date.now()
 		});
+
+        newDog.picture.data = fs.readFileSync(req.file.buffer);
+        newDog.picture.contentType = 'image/png';
 				
 		console.log(newDog);
 		newDog.save(function(err, data){

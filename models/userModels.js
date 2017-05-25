@@ -5,7 +5,9 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var dogSchema = new mongoose.Schema({
 	name:{type:String, required:true},
 	age:{type:Number, required:true},
-	picture:{type:String, required:true},
+	picture:{
+		data: Buffer, contentType: String
+	},
 	gender:{type:String, required:true},
 	breed:{type:String, required:true},
 	
