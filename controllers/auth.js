@@ -77,7 +77,7 @@ function checkMatch(userID, targetID, callback){
 
 
 function getMessages(userId, targetId, callback){
-    Messages.find({userFrom: {$in: [userId, targetId]}, userTo: {$in: [userId, targetId]}}, {sort:{dateCreated: 1}},
+    Messages.find({$or:[{userFrom: userId, userTo: targetId}, {userFrom: targetId, userTo: userId}]}, {sort:{dateCreated: 1}},
     function(err, messages){
         console.log("userId: " + userId);
         console.log("targetId: " + targetId);
