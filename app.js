@@ -42,10 +42,9 @@ app.use(passport.session());
 app.use('/', index);
 app.use('/users', users);
 
-app.use(multer({dest: './uploads/', rename: function(fieldname, filename){
-    return filename;
-}
-}));
+app.use(
+    multer({dest: './uploads/'}).single('singleInputFileName')
+);
 
 var User = mongoose.model('User');
 passport.use(new LocalStrategy(User.authenticate()));
