@@ -91,8 +91,8 @@ module.exports.registerPost = function(req, res, next){
 					dateCreated: Date.now()
 				});
 
-				newUser.profilePicture.data = fs.readFileSync(req.file.buffer);
-				newUser.profilePicture.contentType = 'image/png';
+				newUser.profilePicture.data = req.file.buffer;
+				newUser.profilePicture.contentType = req.file.mimetype;
 				
 				console.log(newUser);
 				User.register(newUser, req.body.password1, function(err, data){
@@ -165,8 +165,8 @@ module.exports.registerDogPost = function(req, res, next){
 			dateCreated: Date.now()
 		});
 
-        newDog.picture.data = fs.readFileSync(req.file.buffer);
-        newDog.picture.contentType = 'image/png';
+        newDog.picture.data = req.file.buffer;
+        newDog.picture.contentType = req.file.mimetype;
 				
 		console.log(newDog);
 		newDog.save(function(err, data){
