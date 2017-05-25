@@ -231,18 +231,15 @@ module.exports.proflePost = function(req, res, next){
 module.exports.matches = function(req, res, next){
     // get user IDs you have accepted
     Matches.find({'user': req.user._id, response:'accept'}, 'targetUser', function(err, yourMatches){
-        var matchIds = [];
-
-        for(var yourMatch in yourMatches){
-            matchIds.push(yourMatches[yourMatch].targetUser);
-        }
-
+        console.log("Your Matches: " + yourMatches);
         // filter for user IDs who have accepted you
-        Matches.find({'user': {$in: matchIds}, targetUser: req.user._id, response:'accept'}, 'user', function(err, matches){
+        Matches.find({'user': {$in: yourMatches}, targetUser: req.user._id, response:'accept'}, 'user', function(err, matches){
+
+            console.log("Matches: " + matches);
 
             // get user objects for matches
             User.find({'_id': {$in: matches}}, function(err, users){
-                console.log(users);
+                console.log("Users: " + users);
                 res.render('matches', {matches: users});
             });
         });
