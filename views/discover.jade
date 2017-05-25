@@ -13,12 +13,12 @@ block content
 					br
 					div.discover-container
 						div.img-container
-							img(id="id_discover_image", src="images/dogs/1.jpg", alt="Dog Profile Picture")
+							img(id="id_discover_image", src="data:" + targetUser.profilePicture.contentType + ";base64," + targetUser.profilePicture.data, alt="Dog Profile Picture")
 						div.row
 							form(method="post", action="/discover", name="discoverForm")
 								div.tall-col.col-1
 									input(type="hidden", id="id_response", name="response")
-									input(type="hidden", name="targetUser", value=targetUser)
+									input(type="hidden", name="targetUser", value=targetUser._id)
 								div.tall-col.col-2
 									a(href="#", onclick="discover('reject');")
 										span.fa.fa-times.fa-extra-big
