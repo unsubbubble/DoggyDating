@@ -229,33 +229,34 @@ module.exports.proflePost = function(req, res, next){
 /* Matches page */
 
 module.exports.matches = function(req, res, next){
-    // get user IDs you have accepted
-    Matches.find({'user': req.user._id, response:'accept'}, 'targetUser', function(err, yourMatches){
-        console.log("Your Matches: " + yourMatches);
-        var matchIds = [];
-
-        for(var yourMatch in yourMatches){
-            matchIds.push(yourMatches[yourMatch].targetUser);
-        }
-
-        // filter for user IDs who have accepted you
-        Matches.find({'user': {$in: matchIds}, targetUser: req.user._id, response:'accept'}, 'user', function(err, matches){
-            console.log("Matches: " + matches);
+    if(loggedIn(req)){
+        // get user IDs you have accepted
+        Matches.find({'user': req.user._id, response:'accept'}, 'targetUser', function(err, yourMatches){
             var matchIds = [];
 
-            for(var match in matches){
-                matchIds.push(matches[match].user);
+            for(var yourMatch in yourMatches){
+                matchIds.push(yourMatches[yourMatch].targetUser);
             }
 
-            // get user objects for matches
-            User.find({'_id': {$in: matchIds}}, function(err, users){
-                console.log("users: " + users);
-                res.render('matches', {matches: users});
+            // filter for user IDs who have accepted you
+            Matches.find({'user': {$in: matchIds}, targetUser: req.user._id, response:'accept'}, 'user', function(err, matches){
+                var matchIds = [];
+
+                for(var match in matches){
+                    matchIds.push(matches[match].user);
+                }
+
+                // get user objects for matches
+                User.find({'_id': {$in: matchIds}}, function(err, users){
+                    res.render('matches', {matches: users});
+                });
             });
+
         });
-
-    });
-
+    }
+    else {
+        res.redirect('/');
+    }
 };
 
 
