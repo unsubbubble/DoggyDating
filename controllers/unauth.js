@@ -39,7 +39,7 @@ function validateRegistration(req){
 		valid = false;
 	}
 	
-	if(!req.body.profile_picture){
+	if(!req.file){
 		valid = false;
 	}
 	
@@ -69,7 +69,6 @@ module.exports.registerPost = function(req, res, next){
 	}
 	else{
 		Dog.findOne({_id:req.body.dog}, function(err, dog){
-			console.log(req);
 			if(err){
 				console.log(err);
 				res.status(500);
@@ -124,7 +123,7 @@ module.exports.registerDog =  function(req, res, next) {
 
 function validateRegistrationDog(req){
 	var valid = true;
-	if(!req.body.profile_picture){
+	if(!req.file){
 		valid = false;
 	}
 	
