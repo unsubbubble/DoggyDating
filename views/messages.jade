@@ -12,9 +12,6 @@ block content
 				div.col.col-2
 					a(href="?id=" + matches[match]._id) Owner: #{matches[match].name}
 						span.notification #{notifications.sorted_messages.(matches[match]._id).length}
-//						-if(notifications && notifications.sorted_messages && notifications.sorted_messages[matches[match]._id]){
-
-						-}
 			- }
 		div.col.col-6
 			-if(targetUser){
