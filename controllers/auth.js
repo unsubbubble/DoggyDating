@@ -642,3 +642,16 @@ module.exports.authors = function(req, res, next){
         res.redirect('/');
     }
 };
+
+
+module.exports.instructions = function(req, res, next){
+    if(loggedIn(req))
+    {
+        getNotifications(req, function(notifications){
+            res.render('instructions_auth', {notifications: notifications});
+        });
+    }
+    else{
+        res.redirect('/');
+    }
+};

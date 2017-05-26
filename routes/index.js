@@ -56,5 +56,8 @@ router.get('/design-architecture', ctrlAuth.design_architecture);
 router.get('/authors', ctrlAuth.authors);
 router.get('/matching-algorithm', ctrlAuth.matching_algorithm);
 
+/* Instructions */
+router.get('/instructions-register', ctrlUnAuth.instructions);
+router.get('/instructions', ctrlAuth.instructions);
 
 module.exports = router;

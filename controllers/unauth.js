@@ -213,4 +213,6 @@ module.exports.welcome = function(req, res, next){
 	res.render('welcome');
 };
 
-
+module.exports.instructions = function(req, res, next){
+    res.render('instructions');
+};
