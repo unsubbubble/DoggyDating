@@ -58,6 +58,7 @@ function getNotifications(req, callback){
                     if(messages[message]){
                         if(!sorted_messages[messages[message].fromUser]){
                             sorted_messages[messages[message].fromUser] = [messages[message]];
+                            console.log(sorted_messages[messages[message].fromUser]);
                         }
                         else{
                             sorted_messages[messages[message].fromUser].push(messages[message]);
