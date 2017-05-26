@@ -505,7 +505,7 @@ module.exports.preferences = function(req, res, next){
 
 function validatePreferencePost(req){
     var valid = true;
-
+    console.log(req.body);
     if(!req.body.dogAgeDifference || !req.body.dogGenderPreference ||
     !req.body.ownerAgeDifference || ! req.body.ownerGenderPreference){
         valid = false;
