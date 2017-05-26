@@ -503,7 +503,7 @@ module.exports.preferences = function(req, res, next){
     }
 };
 
-function validatePreferencePost(req){
+function validatePreferencePost(req, callback){
     var valid = true;
     console.log(req.body);
     if(!req.body.dogAgeDifference || !req.body.dogGenderPreference ||
@@ -511,35 +511,40 @@ function validatePreferencePost(req){
         valid = false;
     }
 
-    return valid;
+    callback(valid);
 }
 
 module.exports.preferencesPost = function(req, res, next){
     console.log(req.body);
     if(loggedIn(req)){
-        if(validateProfileUpdate(req)){
-            var userUpdate = req.user;
-            userUpdate.preferences.ownerGenderPreference = req.body.ownerGenderPreference;
-            userUpdate.preferences.ownerAgeDifferenceRange = req.body.ownerAgeDifference;
-            userUpdate.preferences.dogGenderPreference = req.body.dogGenderPreference;
-            userUpdate.preferences.dogAgeDifferenceRange = req.body.dogAgeDifference;
+        validateProfileUpdate(req, function(check){
+            if(check){
+                var userUpdate = req.user;
+                userUpdate.preferences.ownerGenderPreference = req.body.ownerGenderPreference;
+                userUpdate.preferences.ownerAgeDifferenceRange = req.body.ownerAgeDifference;
+                userUpdate.preferences.dogGenderPreference = req.body.dogGenderPreference;
+                userUpdate.preferences.dogAgeDifferenceRange = req.body.dogAgeDifference;
 
-            userUpdate.save(function(err, data){
-                if(err){
-                    console.log(err);
-                    res.status(500);
-                    res.render('error', {
-                        message: err.message,
-                        error: err
-                    });
-                }else{
-                    console.log(data + " updated");
-                    res.redirect('/preferences');
-                }
-            })
-        }else{
-            res.redirect('/preferences')
-        }
+                userUpdate.save(function(err, data){
+                    if(err){
+                        console.log(err);
+                        res.status(500);
+                        res.render('error', {
+                            message: err.message,
+                            error: err
+                        });
+                    }else{
+                        console.log(data + " updated");
+                        res.redirect('/preferences');
+                    }
+                })
+            }
+            else{
+                console.log("Form invalid");
+                res.redirect('/preferences');
+            }
+
+        });
 
     }else{
         res.redirect('/');
