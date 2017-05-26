@@ -252,7 +252,7 @@ module.exports.discoverPost = function(req, res, next) {
   }
 };
 
-function markMessagesRead(userId, messages, callback){
+function markMessagesRead(userId, messages){
     for(var message in messages){
         if(messages[message].userTo == userId) {
             messages[message].read = true;
@@ -267,14 +267,9 @@ function markMessagesRead(userId, messages, callback){
                 }
                 else {
                     console.log(data, ' saved');
-                    callback();
                 }
             });
         }
-        callback();
-    }
-    if(!messages || (messages && messages.length == 0)){
-        callback()
     }
 }
 
@@ -293,10 +288,9 @@ module.exports.messages = function(req, res, next) {
                                     if (isMatch) {
                                         getMessages(req.user._id, id, function (messages) {
                                             console.log(messages);
-                                            markMessagesRead(req.user._id, messages, function(){
-                                                res.render('messages', {matches: users, messages: messages, target: id,
-                                                    notifications:notifications, targetUser: targetUser});
-                                            });
+                                            markMessagesRead(req.user._id, messages);
+                                            res.render('messages', {matches: users, messages: messages, target: id,
+                                                notifications:notifications, targetUser: targetUser});
                                         })
                                     }
                                     else {
@@ -453,7 +447,7 @@ module.exports.proflePost = function(req, res, next){
 
 /* Matches page */
 
-function markMatchesRead(userId, matchIds, callback){
+function markMatchesRead(userId, matchIds){
     for(var match in matchIds){
         console.log("Match: " + match);
         Matches.findOne({user: matchIds[match], targetUser: userId, response: "accept", read: "false"},
@@ -473,18 +467,11 @@ function markMatchesRead(userId, matchIds, callback){
                     }
                     else {
                         console.log(data, ' saved');
-                        callback();
                     }
 
                 })
-            }else{
-                callback();
             }
         })
-    }
-
-    if(!matchIds || (matchIds && matchIds.length == 0)){
-        callback();
     }
 }
 
@@ -494,9 +481,8 @@ module.exports.matches = function(req, res, next){
            // get user objects for matches
            User.find({'_id': {$in: matchIds}}, function(err, users) {
                getNotifications(req, function(notifications){
-                   markMatchesRead(req.user._id, matchIds, function(){
-                       res.render('matches', {matches: users, notifications: notifications});
-                   });
+                   markMatchesRead(req.user._id, matchIds);
+                   res.render('matches', {matches: users, notifications: notifications});
                });
            });
        });
