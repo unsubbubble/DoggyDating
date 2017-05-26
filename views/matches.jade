@@ -17,14 +17,12 @@ block content
                         div.img-container
                             img(id="id_discover_image", src="data:" + matches[match].dog[0].picture.contentType + ";base64," + matches[match].dog[0].picture.data, alt="Dog Profile Picture")
                         div.row
-                            div.tall-col.col-4
-                                p Age: #{matches[match].dog[0].age}
-                                p Breed: #{matches[match].dog[0].breed}
-                            div.tall-col.col-4
-                                p Owner's Name: #{matches[match].name}
-                                p Email: #{matches[match].email}
-                        div.row
-                            a(href="/messages?id=" + matches[match]._id) Message #{matches[match].name}
+                            p.center-text Age: #{matches[match].dog[0].age}
+                            p.center-text Breed: #{matches[match].dog[0].breed}
+                            p.center-text Suburb: #{matches[match].dog[0].suburb}
+                            p.center-text Owner's Name: #{matches[match].name}
+                            p.center-text Email: #{matches[match].email}
+                            a.center-text(href="/messages?id=" + matches[match]._id) Message #{matches[match].name}
             div.tall-col.col-4
     -}
 

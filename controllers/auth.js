@@ -579,3 +579,66 @@ module.exports.logout = function(req, res, next){
     req.logout();
     res.redirect('/');
 };
+
+
+/* About */
+module.exports.about = function(req, res, next){
+    if(loggedIn(req))
+    {
+        getNotifications(req, function(notifications){
+            res.render('about', {notifications: notifications});
+        });
+    }
+    else{
+        res.redirect('/');
+    }
+};
+
+module.exports.test_validation = function(req, res, next){
+    if(loggedIn(req))
+    {
+        getNotifications(req, function(notifications){
+            res.render('test_validation', {notifications: notifications});
+        });
+    }
+    else{
+        res.redirect('/');
+    }
+};
+
+module.exports.design_architecture = function(req, res, next){
+    if(loggedIn(req))
+    {
+        getNotifications(req, function(notifications){
+            res.render('design_architecture', {notifications: notifications});
+        });
+    }
+    else{
+        res.redirect('/');
+    }
+};
+
+module.exports.matching_algorithm = function(req, res, next){
+    if(loggedIn(req))
+    {
+        getNotifications(req, function(notifications){
+            res.render('matching_algorithm', {notifications: notifications});
+        });
+    }
+    else{
+        res.redirect('/');
+    }
+};
+
+
+module.exports.authors = function(req, res, next){
+    if(loggedIn(req))
+    {
+        getNotifications(req, function(notifications){
+            res.render('authors', {notifications: notifications});
+        });
+    }
+    else{
+        res.redirect('/');
+    }
+};

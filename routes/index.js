@@ -48,4 +48,13 @@ router.post('/preferences', ctrlAuth.preferencesPost);
 /* Welcome */
 router.get('/welcome', ctrlUnAuth.welcome);
 
+
+/* About */
+router.get('/about', ctrlAuth.about);
+router.get('/test-validation', ctrlAuth.test_validation);
+router.get('/design-architecture', ctrlAuth.design_architecture);
+router.get('/authors', ctrlAuth.authors);
+router.get('/matching-algorithm', ctrlAuth.matching_algorithm);
+
+
 module.exports = router;
