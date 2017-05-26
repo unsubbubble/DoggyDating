@@ -106,7 +106,7 @@ module.exports.registerPost = function(req, res, next){
                         ownerGenderPreference: ownerGenderPreference,
                         dogGenderPreference: dogGenderPreference,
                         ownerAgeDifferenceRange: ownerAgeDifference,
-                        dogAgeDifferenceRage: dogAgeDifference
+                        dogAgeDifferenceRange: dogAgeDifference
 					},
 					
 					dateCreated: Date.now()

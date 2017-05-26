@@ -36,7 +36,7 @@ var userSchema = new mongoose.Schema({
         ownerGenderPreference: {type: String, required: true},
         dogGenderPreference: {type: String, required: true},
         ownerAgeDifferenceRange: {type: Number, required: true},
-        dogAgeDifferenceRange: {type: Number, requred: true}
+        dogAgeDifferenceRange: {type: Number, required: true}
     },
 	
 	dateCreated:{type:Date, required:true},
