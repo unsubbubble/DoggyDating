@@ -17,12 +17,14 @@ block content
                                 -}else{
                                 input(type="radio", name="ownerGenderPreference", value="male", required)
                                 -}
+                            br
                             label Female
                                 -if (user.preferences.ownerGenderPreference == "female"){
                                 input(type="radio", name="ownerGenderPreference", value="female", required, checked)
                                 -}else{
                                 input(type="radio", name="ownerGenderPreference", value="female", required)
                                 -}
+                            br
                             label Any
                                 -if (user.preferences.ownerGenderPreference == "any"){
                                 input(type="radio", name="ownerGenderPreference", value="any", required, checked)
@@ -43,12 +45,14 @@ block content
                                 -}else{
                                 input(type="radio", name="dogGenderPreference", value="male", required)
                                 -}
+                            br
                             label Female
                                 -if (user.preferences.dogGenderPreference == "female"){
                                 input(type="radio", name="dogGenderPreference", value="female", required, checked)
                                 -}else{
                                 input(type="radio", name="dogGenderPreference", value="female", required)
                                 -}
+                            br
                             label Any
                                 -if (user.preferences.dogGenderPreference == "any"){
                                 input(type="radio", name="dogGenderPreference", value="any", required, checked)

@@ -67,6 +67,8 @@ function getNotifications(req, callback){
 
                 notifications['sorted_messages'] = sorted_messages;
 
+                console.log("Sorted Messages: " + sorted_messages);
+
                 callback(notifications);
             });
         });
