@@ -36,7 +36,7 @@ function getNotifications(req, callback){
     var notifications = {};
     Messages.find({userTo: userID, read: false}).exec(function(err, messages){
         console.log("Messages: " + messages);
-        getMatches(req, function(err, matchIds){
+        getMatches(req, function(matchIds){
             console.log(matchIds);
             Matches.find({user: {$in: matchIds}, targetUser: userID, response: 'accept', read: 'false'}).exec(function(err, matches){
                 console.log("Matches: " + matches);
