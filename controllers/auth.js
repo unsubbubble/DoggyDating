@@ -252,7 +252,7 @@ module.exports.discoverPost = function(req, res, next) {
   }
 };
 
-function markMessagesRead(userId, messages){
+function markMessagesRead(userId, messages, callback){
     for(var message in messages){
         if(messages[message].userTo == userId) {
             messages[message].read = true;
@@ -267,10 +267,13 @@ function markMessagesRead(userId, messages){
                 }
                 else {
                     console.log(data, ' saved');
+                    callback();
                 }
             });
         }
+        callback();
     }
+    callback()
 }
 
 /* Messages */
@@ -288,9 +291,10 @@ module.exports.messages = function(req, res, next) {
                                     if (isMatch) {
                                         getMessages(req.user._id, id, function (messages) {
                                             console.log(messages);
-                                            markMessagesRead(req.user._id, messages);
-                                            res.render('messages', {matches: users, messages: messages, target: id,
-                                                notifications:notifications, targetUser: targetUser});
+                                            markMessagesRead(req.user._id, messages, function(){
+                                                res.render('messages', {matches: users, messages: messages, target: id,
+                                                    notifications:notifications, targetUser: targetUser});
+                                            });
                                         })
                                     }
                                     else {
@@ -446,6 +450,34 @@ module.exports.proflePost = function(req, res, next){
 
 
 /* Matches page */
+
+function markMatchesRead(userId, matchIds, callback){
+    for(var match in matchIds){
+        Matches.findOne({user: matchIds[match], targetUser: userId, response: "accept", read: "false"},
+            function(err, matchToRead){
+            if(matchToRead){
+                matchToRead.read = true;
+                matchToRead.save(function(err, data){
+                    if (err) {
+                        console.log(err);
+                        res.status(500);
+                        res.render('error', {
+                            message: err.message,
+                            error: err
+                        });
+                    }
+                    else {
+                        console.log(data, ' saved');
+                        callback();
+                    }
+
+                })
+            }
+            callback();
+        })
+    }
+    callback();
+}
 
 module.exports.matches = function(req, res, next){
     if(loggedIn(req)){
