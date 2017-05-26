@@ -61,14 +61,6 @@ var messageSchema = new mongoose.Schema({
 
 var Messages = mongoose.model('Messages', messageSchema);
 
-var notificationSchema = new mongoose.Schema({
-	target:{type:String, required:true},
-	userTarget:{type:String, required:true},
-	read:{type:Boolean, required:true, default:false},
-    dateCreated:{type:Date, required:true}
-});
-
-var Notifications = mongoose.model('Notifications', notificationSchema);
 		
 		
 		

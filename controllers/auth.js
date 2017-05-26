@@ -8,6 +8,12 @@ function loggedIn(req){
   return req.user;
 }
 
+function getNotifications(userID, callback){
+    Messages.find({userTo: userID, read: false}, function(messages){
+        callback({'messages': messages.length})
+    })
+}
+
 function getMatches(req, callback){
     // get user IDs you have accepted
     Matches.find({'user': req.user._id, response:'accept'}, 'targetUser', function(err, yourMatches){
@@ -148,7 +154,11 @@ function sortDiscover(req, callback){
 module.exports.discover = function(req, res, next) {
   if(loggedIn(req)){
       sortDiscover(req, function(targetUser){
-          res.render('discover', { title: 'Discover', user: req.user, targetUser: targetUser})
+          getNotifications(req.user._id, function(notifications){
+              res.render('discover', { title: 'Discover', user: req.user, targetUser: targetUser,
+                  notifications: notifications})
+          });
+
 
       });
   }

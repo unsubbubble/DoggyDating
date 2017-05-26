@@ -291,6 +291,8 @@ footer{
 .notification{
     background-color: #f44336;
     color: #FFFFFF;
-    border-radius: 4px;
+    border-radius: 12px;
     font-size: 12px;
+    padding: 3px;
+
 }

@@ -14,10 +14,15 @@ block nav
 				div.tall-col.col-1
 					a(href="/matches")
 						span.fa.fa-heart.fa-big
+						-if(notifications){
+						span.notification #{notifications.matches}
+						-}
 				div.tall-col.col-1
 					a(href="/messages")
 						span.fa.fa-comment.fa-big
-						span.notification 10
+						-if(notifications){
+						span.notification #{notifications.messages}
+						-}
 				div.tall-col.col-1
 					div.dropdown
 						button.dropdown-btn(onclick="myFunction()")
