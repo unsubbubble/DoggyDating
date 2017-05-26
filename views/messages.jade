@@ -10,7 +10,7 @@ block content
 					div.message-profile
 						img(src=src = "data:" + matches[match].dog[0].picture.contentType + ";base64," + matches[match].dog[0].picture.data, alt="Contact Photo")
 				div.col.col-2
-					a(href="?id=" + matches[match]._id) Owner: #{matches[match].name}
+					a(href="?id=" + matches[match]._id) Owner: #{matches[match].name}&nbsp;
 						-if(notifications && notifications.sorted_messages && notifications.sorted_messages[matches[match]._id]){
 						span.notification #{notifications.sorted_messages[matches[match]._id].length}
 						-}
