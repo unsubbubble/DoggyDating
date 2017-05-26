@@ -485,7 +485,9 @@ module.exports.matches = function(req, res, next){
            // get user objects for matches
            User.find({'_id': {$in: matchIds}}, function(err, users) {
                getNotifications(req, function(notifications){
-                   res.render('matches', {matches: users, notifications: notifications});
+                   markMatchesRead(req.user._id, matchIds, function(){
+                       res.render('matches', {matches: users, notifications: notifications});
+                   });
                });
            });
        });
