@@ -9,8 +9,13 @@ function loggedIn(req){
 }
 
 function getNotifications(userID, callback){
-    Messages.find({userTo: userID, read: false}, function(messages){
-        callback({'messages': messages.length})
+    Messages.find({userTo: userID, read: false}).exec(function(err, messages){
+        console.log(messages);
+        if(messages){
+            callback({'messages': messages.length})
+        }else{
+            callback({'messages': messages})
+        }
     })
 }
 
