@@ -14,7 +14,7 @@ function getNotifications(req, callback){
     Messages.find({userTo: userID, read: false}).exec(function(err, messages){
         console.log("Messages: " + messages);
         getMatches(req, function(err, matchIds){
-            Matches.find({'user': {$in: matchIds}, targetUser: userID, response: 'accept', read: 'false'}).exec(function(err, matches){
+            Matches.find({user: {$in: matchIds}, targetUser: userID, response: 'accept', read: 'false'}).exec(function(err, matches){
                 console.log("Matches: " + matches);
                 if(messages){
 
@@ -347,7 +347,7 @@ module.exports.profile = function(req, res, next) {
     if(loggedIn(req)) {
         var dob = new Date(req.user.dateOfBirth).toISOString().slice(0, 10);
         getNotifications(req, function(notifications){
-            res.render('profile', {user: req.user, dob: dob});
+            res.render('profile', {user: req.user, dob: dob, notifications: notifications});
         });
     }
     else{
