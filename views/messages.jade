@@ -23,11 +23,11 @@ block content
 						br
 						-if(messages[message].userFrom == target){
 							div.row
-								span.message-r #{messages[message].message}
+								p.message-r #{messages[message].message}
 						-}
 						-else{
 							div.row
-								span.message-s #{messages[message].message}
+								p.message-s #{messages[message].message}
 						- }
 						-}
 					-}

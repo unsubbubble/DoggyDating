@@ -4,7 +4,8 @@
 }
 
 .messages{
-    overflow: auto;
+    overflow-y: scroll;
+    overflow-x: hidden;
     min-height: 350px;
 }
 
@@ -19,6 +20,8 @@
     color: white;
     padding: 15px;
     margin: 15px;
+    word-wrap: break-word;
+    position: relative;
 }
 
 .message-s{
@@ -30,6 +33,8 @@
     margin: 15px;
     float: right;
     clear:both;
+    word-wrap: break-word;
+    position: relative;
 }
 
 .message-profile{
