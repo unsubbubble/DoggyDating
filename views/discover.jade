@@ -17,9 +17,18 @@ block content
 								div
 									input(type="hidden", id="id_response", name="response")
 									input(type="hidden", name="targetUser", value=targetUser._id)
-								div.tall-col.col-10
+								div.tall-col.col-1
 									a(href="#", onclick="discover('reject');")
 										span.fa.fa-times.fa-extra-big
+								div.tall-col.col-9
+									div.row
+										div.tall-col.col-4
+											p Age: #{targetUser.dog[0].age}
+											p Breed: #{targetUser.dog[0].breed}
+										div.tall-col.col-4
+											p Owner's Name: #{targetUser.name}
+											p Date of Birth: #{targetUser.dateOfBirth}
+											p Suburb: #{targetUser.suburb}
 
 								div.tall-col.col-1
 									a(href="#", onclick="discover('accept');")

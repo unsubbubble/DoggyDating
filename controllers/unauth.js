@@ -126,7 +126,7 @@ module.exports.registerPost = function(req, res, next){
 						});
 					}
 					else{
-						res.redirect("/");
+						res.redirect("/welcome");
 					}
 				
 				});
@@ -208,4 +208,9 @@ module.exports.registerDogPost = function(req, res, next){
 		});
 	}
 };
+
+module.exports.welcome = function(res, req, next){
+	res.render('welcome');
+};
+
 

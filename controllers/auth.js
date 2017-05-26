@@ -53,6 +53,20 @@ function getNotifications(req, callback){
                     notifications['matches'] = matches;
                 }
 
+                var sorted_messages = {};
+                for(var message in messages){
+                    if(messages[message]){
+                        if(!sorted_messages[messages[message].fromUser]){
+                            sorted_messages[messages[message].fromUser] = [messages[message]];
+                        }
+                        else{
+                            sorted_messages[messages[message].fromUser].push(messages[message]);
+                        }
+                    }
+                }
+
+                notifications['sorted_messages'] = sorted_messages;
+
                 callback(notifications);
             });
         });
@@ -496,7 +510,9 @@ module.exports.matches = function(req, res, next){
 /* Preferences */
 module.exports.preferences = function(req, res, next){
     if(loggedIn(req)){
-        res.render('preferences', {user: req.user})
+        getNotifications(req, function(notifications){
+            res.render('preferences', {user: req.user, notifications: notifications})
+        });
     }
     else{
         res.redirect('/');

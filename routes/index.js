@@ -45,4 +45,7 @@ router.get('/profile', ctrlAuth.profile);
 router.get('/preferences', ctrlAuth.preferences);
 router.post('/preferences', ctrlAuth.preferencesPost);
 
+/* Welcome */
+router.get('/welcome', ctrlUnAuth.welcome);
+
 module.exports = router;
