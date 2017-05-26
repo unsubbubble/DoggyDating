@@ -68,6 +68,7 @@ function getNotifications(req, callback){
 
                 notifications['sorted_messages'] = sorted_messages;
                 for(var message in sorted_messages){
+                    console.log("Message: " + message);
                     console.log(sorted_messages[message]);
                 }
 
