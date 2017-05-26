@@ -456,8 +456,10 @@ function markMatchesRead(userId, matchIds, callback){
         console.log("Match: " + match);
         Matches.findOne({user: matchIds[match], targetUser: userId, response: "accept", read: "false"},
             function(err, matchToRead){
+            console.log("Match to Read: " + matchToRead);
             if(matchToRead){
                 matchToRead.read = true;
+                console.log("Match to Read: " + matchToRead);
                 matchToRead.save(function(err, data){
                     if (err) {
                         console.log(err);
