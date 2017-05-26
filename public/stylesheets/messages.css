@@ -20,6 +20,8 @@
     color: white;
     padding: 15px;
     margin: 15px;
+    float: left;
+    clear: both;
     word-wrap: break-word;
     position: relative;
 }
