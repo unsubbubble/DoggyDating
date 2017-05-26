@@ -80,9 +80,9 @@ module.exports.registerPost = function(req, res, next){
 			else{
 				var ownerGenderPreference;
 
-				if(user.gender == "male"){
+				if(req.body.gender == "male"){
 					ownerGenderPreference = "female";
-				}else if(user.gender == "female"){
+				}else if(req.body.gender == "female"){
 					ownerGenderPreference = "male";
 				}else{
 					ownerGenderPreference = "any";
