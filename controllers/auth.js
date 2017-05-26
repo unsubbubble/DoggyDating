@@ -8,14 +8,30 @@ function loggedIn(req){
   return req.user;
 }
 
-function getNotifications(userID, callback){
+function getNotifications(req, callback){
+    var userID = req.user._id;
+    var notifications = {};
     Messages.find({userTo: userID, read: false}).exec(function(err, messages){
-        console.log(messages);
-        if(messages){
-            callback({'messages': messages.length})
-        }else{
-            callback({'messages': messages})
-        }
+        console.log("Messages: " + messages);
+        getMatches(req, function(err, matchIds){
+            Matches.find({'user': {$in: matchIds}, targetUser: userID, response: 'accept', read: 'false'}).exec(function(err, matches){
+                console.log("Matches: " + matches);
+                if(messages){
+
+                    notifications['messages'] = messages.length;
+                }else{
+                    notifications['messages'] = messages;
+                }
+
+                if(matches){
+                    notifications['matches'] = matches.length;
+                }else{
+                    notifications['matches'] = matches;
+                }
+
+                callback(notifications);
+            });
+        });
     })
 }
 
@@ -36,10 +52,7 @@ function getMatches(req, callback){
                 matchIds.push(matches[match].user);
             }
 
-            // get user objects for matches
-            User.find({'_id': {$in: matchIds}}, function(err, users){
-                callback(users);
-            });
+            callback(matchIds);
         });
 
     });
@@ -159,7 +172,7 @@ function sortDiscover(req, callback){
 module.exports.discover = function(req, res, next) {
   if(loggedIn(req)){
       sortDiscover(req, function(targetUser){
-          getNotifications(req.user._id, function(notifications){
+          getNotifications(req, function(notifications){
               res.render('discover', { title: 'Discover', user: req.user, targetUser: targetUser,
                   notifications: notifications})
           });
@@ -240,31 +253,39 @@ module.exports.discoverPost = function(req, res, next) {
 
 /* Messages */
 module.exports.messages = function(req, res, next) {
-    if(loggedIn(req)){
-        getMatches(req, function(users){
-            if(req.query){
-                var id = req.query.id;
-                if(id){
-                    checkMatch(req.user._id, id, function(isMatch){
-                        if(isMatch){
-                            getMessages(req.user._id, id, function(messages){
-                                console.log(messages);
-                                res.render('messages', { matches: users, messages: messages, target: id });
-                            })
+    if(loggedIn(req)) {
+        getNotifications(req, function(notifications){
+            getMatches(req, function (matchIds) {
+                // get user objects for matches
+                User.find({'_id': {$in: matchIds}}, function (err, users) {
+                    if (req.query) {
+                        var id = req.query.id;
+                        if (id) {
+                            User.findOne({'_id': id}, function(err, targetUser){
+                                checkMatch(req.user._id, id, function (isMatch) {
+                                    if (isMatch) {
+                                        getMessages(req.user._id, id, function (messages) {
+                                            console.log(messages);
+                                            res.render('messages', {matches: users, messages: messages, target: id,
+                                                notifications:notifications, targetUser: targetUser});
+                                        })
+                                    }
+                                    else {
+                                        res.render('messages', {matches: users, target: id,
+                                            notifications: notifications, targetUser:targetUser});
+                                    }
+                                })
+                            });
                         }
-                        else{
-                            res.render('messages', { matches: users, target: id });
+                        else {
+                            res.render('messages', {matches: users, notifications: notifications});
                         }
-                    })
-
-                }
-                else{
-                    res.render('messages', { matches: users });
-                }
-            }
-            else{
-                res.render('messages', { matches: users });
-            }
+                    }
+                    else {
+                        res.render('messages', {matches: users, notifications: notifications});
+                    }
+                });
+            });
         });
     }
     else{
@@ -325,7 +346,9 @@ module.exports.messagesPost = function(req, res, next){
 module.exports.profile = function(req, res, next) {
     if(loggedIn(req)) {
         var dob = new Date(req.user.dateOfBirth).toISOString().slice(0, 10);
-        res.render('profile', {user: req.user, dob: dob});
+        getNotifications(req, function(notifications){
+            res.render('profile', {user: req.user, dob: dob});
+        });
     }
     else{
         res.redirect("/");
@@ -403,8 +426,13 @@ module.exports.proflePost = function(req, res, next){
 
 module.exports.matches = function(req, res, next){
     if(loggedIn(req)){
-       getMatches(req, function(users){
-           res.render('matches', {matches: users});
+       getMatches(req, function(matchIds){
+           // get user objects for matches
+           User.find({'_id': {$in: matchIds}}, function(err, users) {
+               getNotifications(req, function(notifications){
+                   res.render('matches', {matches: users, notifications: notifications});
+               });
+           });
        });
     }
     else {

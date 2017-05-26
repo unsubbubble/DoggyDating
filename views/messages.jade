@@ -13,7 +13,11 @@ block content
 					a(href="?id=" + matches[match]._id) Owner: #{matches[match].name}
 			- }
 		div.col.col-6
+			-if(targetUser){
+			h2 Messages - #{targetUser.name}
+			-}else{
 			h2 Messages
+			-}
 			div.messages-container
 				br
 				div.messages(id="id_messages")

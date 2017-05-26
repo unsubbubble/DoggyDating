@@ -14,13 +14,13 @@ block nav
 				div.tall-col.col-1
 					a(href="/matches")
 						span.fa.fa-heart.fa-big
-						-if(notifications){
+						-if(notifications && notifications.matches){
 						span.notification #{notifications.matches}
 						-}
 				div.tall-col.col-1
 					a(href="/messages")
 						span.fa.fa-comment.fa-big
-						-if(notifications){
+						-if(notifications && notifications.messages){
 						span.notification #{notifications.messages}
 						-}
 				div.tall-col.col-1

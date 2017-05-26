@@ -46,7 +46,8 @@ var matchSchema = new mongoose.Schema({
 	response:{type:String, required:true},
 	user:{type:String, required:true},
 	targetUser:{type:String, required:true},
-    dateCreated:{type:Date, required:true}
+    dateCreated:{type:Date, required:true},
+	read:{type:Boolean, required:true, default:false}
 });
 
 var Matches = mongoose.model('Matches', matchSchema);
