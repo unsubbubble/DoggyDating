@@ -451,7 +451,7 @@ module.exports.proflePost = function(req, res, next){
 
 /* Matches page */
 
-function markMatchesRead(userId, matchIds, callback){
+function markMatchesRead(userId, matchIds){
     for(var match in matchIds){
         console.log("Match: " + match);
         Matches.findOne({user: matchIds[match], targetUser: userId, response: "accept", read: "false"},
@@ -471,15 +471,12 @@ function markMatchesRead(userId, matchIds, callback){
                     }
                     else {
                         console.log(data, ' saved');
-                        callback();
                     }
 
                 })
             }
-            callback();
         })
     }
-    callback();
 }
 
 module.exports.matches = function(req, res, next){
@@ -488,9 +485,8 @@ module.exports.matches = function(req, res, next){
            // get user objects for matches
            User.find({'_id': {$in: matchIds}}, function(err, users) {
                getNotifications(req, function(notifications){
-                   markMatchesRead(req.user._id, matchIds, function(){
-                       res.render('matches', {matches: users, notifications: notifications});
-                   });
+                   markMatchesRead(req.user._id, matchIds);
+                   res.render('matches', {matches: users, notifications: notifications});
                });
            });
        });
