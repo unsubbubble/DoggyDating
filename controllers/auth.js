@@ -533,6 +533,7 @@ module.exports.preferencesPost = function(req, res, next){
                     });
                 }else{
                     console.log(data + " updated");
+                    res.redirect('/preferences');
                 }
             })
         }else{

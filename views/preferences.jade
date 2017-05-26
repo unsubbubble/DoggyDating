@@ -12,23 +12,23 @@ block content
                         th Owner Gender
                         td
                             label Male
-                                -(if user.preferences.ownerGenderPreference == "male"){
-                                input(type="radio", name="ownerGenderPreference", value="male", required, checked)
-                                -}else{
-                                input(type="radio", name="ownerGenderPreference", value="male", required)
-                                -}
+                                //-(if user.preferences.ownerGenderPreference == "male"){
+                                //input(type="radio", name="ownerGenderPreference", value="male", required, checked)
+                                //-}else{
+                                //input(type="radio", name="ownerGenderPreference", value="male", required)
+                                //-}
                             label Female
-                                -(if user.preferences.ownerGenderPreference == "female"){
-                                input(type="radio", name="ownerGenderPreference", value="female", required, checked)
-                                -}else{
-                                input(type="radio", name="ownerGenderPreference", value="female", required)
-                                -}
+                                //-(if user.preferences.ownerGenderPreference == "female"){
+                                //input(type="radio", name="ownerGenderPreference", value="female", required, checked)
+                                //-}else{
+                                //input(type="radio", name="ownerGenderPreference", value="female", required)
+                                //-}
                             label Any
-                                -(if user.preferences.ownerGenderPreference == "any"){
-                                input(type="radio", name="ownerGenderPreference", value="any", required, checked)
-                                -}else{
-                                input(type="radio", name="ownerGenderPreference", value="any", required)
-                                -}
+                                //-(if user.preferences.ownerGenderPreference == "any"){
+                                //input(type="radio", name="ownerGenderPreference", value="any", required, checked)
+                                //-}else{
+                                //input(type="radio", name="ownerGenderPreference", value="any", required)
+                                //-}
                     tr
                         th Owner Age Difference (Years)
                         td
@@ -37,24 +37,24 @@ block content
                     tr
                         th Dog Gender
                         td
-                            label Male
-                                -(if user.preferences.dogGenderPreference == "male"){
-                                input(type="radio", name="dogGenderPreference", value="male", required, checked)
-                                -}else{
-                                input(type="radio", name="dogGenderPreference", value="male", required)
-                                -}
-                            label Female
-                                -(if user.preferences.dogGenderPreference == "female"){
-                                input(type="radio", name="dogGenderPreference", value="female", required, checked)
-                                -}else{
-                                input(type="radio", name="dogGenderPreference", value="female", required)
-                                -}
-                            label Any
-                                -(if user.preferences.dogGenderPreference == "any"){
-                                input(type="radio", name="dogGenderPreference", value="any", required, checked)
-                                -}else{
-                                input(type="radio", name="dogGenderPreference", value="any", required)
-                                -}
+                            //label Male
+                            //    -(if user.preferences.dogGenderPreference == "male"){
+                            //    input(type="radio", name="dogGenderPreference", value="male", required, checked)
+                            //    -}else{
+                            //    input(type="radio", name="dogGenderPreference", value="male", required)
+                            //    -}
+                            //label Female
+                            //    -(if user.preferences.dogGenderPreference == "female"){
+                            //    input(type="radio", name="dogGenderPreference", value="female", required, checked)
+                            //    -}else{
+                            //    input(type="radio", name="dogGenderPreference", value="female", required)
+                            //    -}
+                            //label Any
+                            //    -(if user.preferences.dogGenderPreference == "any"){
+                            //    input(type="radio", name="dogGenderPreference", value="any", required, checked)
+                            //    -}else{
+                            //    input(type="radio", name="dogGenderPreference", value="any", required)
+                            //    -}
                         th Dog Age Difference (Years)
                         td
                             input.text-input(type="number", name="dogAgeDifference",
