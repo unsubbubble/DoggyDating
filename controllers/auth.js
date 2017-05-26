@@ -53,6 +53,27 @@ function getNotifications(req, callback){
                     notifications['matches'] = matches;
                 }
 
+                var sorted_messages = {};
+                for(var message in messages){
+                    if(messages[message]){
+                        if(!sorted_messages[messages[message].fromUser]){
+                            sorted_messages[messages[message].fromUser.toString()]= [messages[message]];
+                            console.log(sorted_messages[messages[message].fromUser]);
+                        }
+                        else{
+                            sorted_messages[messages[message].fromUser.toString()].push(messages[message]);
+                        }
+                    }
+                }
+
+                notifications['sorted_messages'] = sorted_messages;
+                for(var message in sorted_messages){
+                    console.log("Message: " + message);
+                    console.log(sorted_messages[message]);
+                }
+
+                console.log("Sorted Messages: " + sorted_messages);
+
                 callback(notifications);
             });
         });
