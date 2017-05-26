@@ -18,7 +18,7 @@ function getMatches(req, callback){
         }
 
         // filter for user IDs who have accepted you
-        Matches.find({'user': {$in: matchIds}, targetUser: req.user._id, response:'accept'}, 'user', function(err, matches){
+        Matches.find({'user': {$in: matchIds}, targetUser: req.user._id, response:'accept'}, 'user').sort('-dateCreated').exec(function(err, matches){
             var matchIds = [];
 
             for(var match in matches){
