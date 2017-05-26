@@ -453,6 +453,7 @@ module.exports.proflePost = function(req, res, next){
 
 function markMatchesRead(userId, matchIds, callback){
     for(var match in matchIds){
+        console.log("Match: " + match);
         Matches.findOne({user: matchIds[match], targetUser: userId, response: "accept", read: "false"},
             function(err, matchToRead){
             if(matchToRead){
