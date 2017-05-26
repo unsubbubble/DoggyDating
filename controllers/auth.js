@@ -14,6 +14,7 @@ function getNotifications(req, callback){
     Messages.find({userTo: userID, read: false}).exec(function(err, messages){
         console.log("Messages: " + messages);
         getMatches(req, function(err, matchIds){
+            console.log(matchIds);
             Matches.find({user: {$in: matchIds}, targetUser: userID, response: 'accept', read: 'false'}).exec(function(err, matches){
                 console.log("Matches: " + matches);
                 if(messages){
