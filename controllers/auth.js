@@ -515,6 +515,7 @@ function validatePreferencePost(req){
 }
 
 module.exports.preferencesPost = function(req, res, next){
+    console.log(req.body);
     if(loggedIn(req)){
         if(validateProfileUpdate(req)){
             var userUpdate = req.user;
