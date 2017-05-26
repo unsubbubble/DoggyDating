@@ -41,4 +41,8 @@ router.post('/messages', ctrlAuth.messagesPost);
 router.post('/profile', upload.single('dog_picture'), ctrlAuth.proflePost);
 router.get('/profile', ctrlAuth.profile);
 
+/* Preferences Page */
+router.get('/preferences', ctrlAuth.preferences);
+router.post('/preferences', ctrlAuth.preferencesPost);
+
 module.exports = router;

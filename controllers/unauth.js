@@ -78,6 +78,20 @@ module.exports.registerPost = function(req, res, next){
 				});
 			}
 			else{
+				var ownerGenderPreference;
+
+				if(user.gender == "male"){
+					ownerGenderPreference = "female";
+				}else if(user.gender == "female"){
+					ownerGenderPreference = "male";
+				}else{
+					ownerGenderPreference = "any";
+				}
+
+				var dogGenderPreference = dog.gender;
+				var ownerAgeDifference = 10;
+				var dogAgeDifference = 5;
+
 				var newUser = new User({
 					email: req.body.email,
 					username: req.body.email,
@@ -87,6 +101,13 @@ module.exports.registerPost = function(req, res, next){
 					suburb: req.body.address,
 					
 					dog: dog,
+
+					preferences: {
+                        ownerGenderPreference: ownerGenderPreference,
+                        dogGenderPreference: dogGenderPreference,
+                        ownerAgeDifferenceRange: ownerAgeDifference,
+                        dogAgeDifferenceRage: dogAgeDifference
+					},
 					
 					dateCreated: Date.now()
 				});

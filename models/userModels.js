@@ -31,6 +31,13 @@ var userSchema = new mongoose.Schema({
 	suburb:{type:String, required:true},
 	
 	dog:{type:[dogSchema], required:true},
+
+	preferences: {
+        ownerGenderPreference: {type: String, required: true},
+        dogGenderPreference: {type: String, required: true},
+        ownerAgeDifferenceRange: {type: Number, required: true},
+        dogAgeDifferenceRange: {type: Number, requred: true}
+    },
 	
 	dateCreated:{type:Date, required:true},
 	dateLastEdited:{type:Date, required:true, default:Date.now},
@@ -63,5 +70,4 @@ var messageSchema = new mongoose.Schema({
 var Messages = mongoose.model('Messages', messageSchema);
 
 		
-		
-		
+

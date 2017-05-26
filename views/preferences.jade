@@ -1,0 +1,67 @@
+extends auth_base.jade
+block content
+    br
+    br
+    form(action="/preferences", method="post")
+        div.row
+            div.col.col-4
+            div.col.col-6
+                h2 Matchmaking Preferences
+
+                table.table-striped
+                    tr
+                        th Owner Gender
+                        td
+                            label Male
+                                -(if user.preferences.ownerGenderPreference == "male"){
+                                input(type="radio", name="ownerGenderPreference", value="male", required, checked)
+                                -}else{
+                                input(type="radio", name="ownerGenderPreference", value="male", required)
+                                -}
+                            label Female
+                                -(if user.preferences.ownerGenderPreference == "female"){
+                                input(type="radio", name="ownerGenderPreference", value="female", required, checked)
+                                -}else{
+                                input(type="radio", name="ownerGenderPreference", value="female", required)
+                                -}
+                            label Any
+                                -(if user.preferences.ownerGenderPreference == "any"){
+                                input(type="radio", name="ownerGenderPreference", value="any", required, checked)
+                                -}else{
+                                input(type="radio", name="ownerGenderPreference", value="any", required)
+                                -}
+
+                    tr
+                        th Owner Age Difference (Years)
+                        td
+                            input.text-input(type="number", name="ownerAgeDifference",
+                                value=user.preferences.ownerAgeDifferenceRange, placeholder="Age Difference", required)
+                    tr
+                        th Dog Gender
+                        td
+                            label Male
+                                -(if user.preferences.dogGenderPreference == "male"){
+                                input(type="radio", name="dogGenderPreference", value="male", required, checked)
+                                -}else{
+                                input(type="radio", name="dogGenderPreference", value="male", required)
+                                -}
+                            label Female
+                                -(if user.preferences.dogGenderPreference == "female"){
+                                input(type="radio", name="dogGenderPreference", value="female", required, checked)
+                                -}else{
+                                input(type="radio", name="dogGenderPreference", value="female", required)
+                                -}
+                            label Any
+                                -(if user.preferences.dogGenderPreference == "any"){
+                                input(type="radio", name="dogGenderPreference", value="any", required, checked)
+                                -}else{
+                                input(type="radio", name="dogGenderPreference", value="any", required)
+                                -}
+                        th Dog Age Difference (Years)
+                        td
+                            input.text-input(type="number", name="dogAgeDifference",
+                                value=user.preferences.dogAgeDifferenceRange, placeholder="Age Difference", required)
+        div.row
+            div.col.col-9
+            div.col.col-2
+                button.btn.btn-primary(type="submit", onclick="validateForm(this.form)") Update Preferences

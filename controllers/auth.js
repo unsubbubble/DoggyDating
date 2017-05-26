@@ -115,18 +115,18 @@ function rateMatch(user, match){
   var score = 0;
 
   // gender search
-  if(user.gender !== match.gender){
+  if(user.preferences.ownerGenderPreference === match.gender){
     score += 100;
   }
 
   // dog gender search
-  if(user.dog.gender === match.dog.gender){
+  if(user.preferences.dogGenderPreference === match.dog.gender){
     score += 100;
   }
 
   // age difference
 
-  score += (100 -
+  score += (100 + (user.preferences.ownerAgeDifferenceRange) -
     (
         // age difference in years
         Math.abs(user.dateOfBirth - match.dateOfBirth)
@@ -135,7 +135,7 @@ function rateMatch(user, match){
   );
 
   // dog age difference
-  score += (100 - Math.abs(user.dog.age - match.dog.age));
+  score += (100 + (user.preferences.dogAgeDifferenceRange) - Math.abs(user.dog.age - match.dog.age));
 
   return score;
 }
@@ -492,6 +492,57 @@ module.exports.matches = function(req, res, next){
     }
 };
 
+
+/* Preferences */
+module.exports.preferences = function(req, res, next){
+    if(loggedIn(req)){
+        res.render('preferences', {user: req.user})
+    }
+    else{
+        res.redirect('/');
+    }
+};
+
+function validatePreferencePost(req){
+    var valid = true;
+
+    if(!req.body.dogAgeDifference || !req.body.dogGenderPreference ||
+    !req.body.ownerAgeDifference || ! req.body.ownerGenderPreference){
+        valid = false;
+    }
+
+    return valid;
+}
+
+module.exports.preferencesPost = function(req, res, next){
+    if(loggedIn(req)){
+        if(validateProfileUpdate(req)){
+            var userUpdate = req.user;
+            userUpdate.preferences.ownerGenderPreference = req.body.ownerGenderPreference;
+            userUpdate.preferences.ownerAgeDifferenceRange = req.body.ownerAgeDifference;
+            userUpdate.preferences.dogGenderPreference = req.body.dogGenderPreference;
+            userUpdate.preferences.dogAgeDifferenceRange = req.body.dogAgeDifference;
+
+            userUpdate.save(function(err, data){
+                if(err){
+                    console.log(err);
+                    res.status(500);
+                    res.render('error', {
+                        message: err.message,
+                        error: err
+                    });
+                }else{
+                    console.log(data + " updated");
+                }
+            })
+        }else{
+            res.redirect('/preferences')
+        }
+
+    }else{
+        res.redirect('/');
+    }
+};
 
 /* Logout */
 module.exports.logout = function(req, res, next){
