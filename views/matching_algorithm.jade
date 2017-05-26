@@ -3,4 +3,15 @@ block content
     h2.center-text Matching Algorithm
     br
     br
-    p.center-text This page is about the matching algorithm.
+    div.row
+        div.tall-col.col-2
+        div.tall-col.col-6
+            p The matching algorithm takes into account details provided by both accounts to be matched and scores them on compatibility. It gives a score for each "section" of relevance and the aggregates this score. The algorithm then cycles through all users in the database until it finds the best match for you and displays it on your "Discovery" screen. Once you have either accepted or rejected this individual, they are removed from the pool of candidates and the algorithm runs again returning the next best match. The algorithm takes into account the gender of the matches dog, the age difference between your dog and their dog, the gender of the match, and the age difference between you and the match. It also takes into account the location of the match and your location. The algorithm works as follows:
+            ol
+                li The match's score starts at 0.
+                li If the match's dog's gender is the same as the preference you have set then 100 is added to the score. If you specified 'any' gender no score is added. The default when your account is registered is the gender of your dog.
+                li The dog's age difference you have specified in your preferences is added to 100. The age difference between the dogs is then subtracted from that number. This result is added to the match's score. The default age difference is 5.
+                li If the match's gender is the same as the preference you have set then 100 us added to the score. If you specified 'any' gender no score is added. The default when your account is registered is the opposite of your gender.
+                li If the match's suburb is the same as yours then 100 is added to the score.
+                li This score is then compared against your current best match. If the score is higher, your best match is replaced.
+                li Once all users have been looped through, your highest match is returned to the screen. If no match can be found (because there are no other users, or you have already rejected or "Loved" everyone then no match is displayed.

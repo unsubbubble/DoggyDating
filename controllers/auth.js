@@ -141,7 +141,7 @@ function rateMatch(user, match){
   }
 
   // dog gender search
-  if(user.preferences.dogGenderPreference === match.dog.gender){
+  if(user.preferences.dogGenderPreference === match.dog[0].gender){
     score += 100;
   }
 
@@ -156,7 +156,10 @@ function rateMatch(user, match){
   );
 
   // dog age difference
-  score += (100 + (user.preferences.dogAgeDifferenceRange) - Math.abs(user.dog.age - match.dog.age));
+  score += (100 + (user.preferences.dogAgeDifferenceRange) - Math.abs(user.dog[0].age - match.dog[0].age));
+
+  if(user.suburb === match.suburb)
+      score += 100;
 
   return score;
 }
