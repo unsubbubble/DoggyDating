@@ -56,12 +56,12 @@ function getNotifications(req, callback){
                 var sorted_messages = {};
                 for(var message in messages){
                     if(messages[message]){
-                        if(!sorted_messages[messages[message].fromUser]){
-                            sorted_messages[messages[message].fromUser.toString()]= [messages[message]];
-                            console.log(sorted_messages[messages[message].fromUser]);
+                        if(!sorted_messages[messages[message].userFrom]){
+                            sorted_messages[messages[message].userFrom]= [messages[message]];
+                            console.log(sorted_messages[messages[message].userFrom]);
                         }
                         else{
-                            sorted_messages[messages[message].fromUser.toString()].push(messages[message]);
+                            sorted_messages[messages[message].userFrom].push(messages[message]);
                         }
                     }
                 }
