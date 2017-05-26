@@ -8,6 +8,29 @@ function loggedIn(req){
   return req.user;
 }
 
+function getMatches(req, callback){
+    // get user IDs you have accepted
+    Matches.find({'user': req.user._id, response:'accept'}, 'targetUser', function(err, yourMatches){
+        var matchIds = [];
+
+        for(var yourMatch in yourMatches){
+            matchIds.push(yourMatches[yourMatch].targetUser);
+        }
+
+        // filter for user IDs who have accepted you
+        Matches.find({'user': {$in: matchIds}, targetUser: req.user._id, response:'accept'}, 'user', function(err, matches){
+            var matchIds = [];
+
+            for(var match in matches){
+                matchIds.push(matches[match].user);
+            }
+
+            callback(matchIds);
+        });
+
+    });
+}
+
 function getNotifications(req, callback){
     var userID = req.user._id;
     var notifications = {};
@@ -34,29 +57,6 @@ function getNotifications(req, callback){
             });
         });
     })
-}
-
-function getMatches(req, callback){
-    // get user IDs you have accepted
-    Matches.find({'user': req.user._id, response:'accept'}, 'targetUser', function(err, yourMatches){
-        var matchIds = [];
-
-        for(var yourMatch in yourMatches){
-            matchIds.push(yourMatches[yourMatch].targetUser);
-        }
-
-        // filter for user IDs who have accepted you
-        Matches.find({'user': {$in: matchIds}, targetUser: req.user._id, response:'accept'}, 'user', function(err, matches){
-            var matchIds = [];
-
-            for(var match in matches){
-                matchIds.push(matches[match].user);
-            }
-
-            callback(matchIds);
-        });
-
-    });
 }
 
 
