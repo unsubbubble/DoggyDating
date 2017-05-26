@@ -209,7 +209,7 @@ module.exports.registerDogPost = function(req, res, next){
 	}
 };
 
-module.exports.welcome = function(res, req, next){
+module.exports.welcome = function(req, res, next){
 	res.render('welcome');
 };
 
